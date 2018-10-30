@@ -17,28 +17,26 @@ app.use(cors())
 app.get('/', (req, res) => {
   const help = `
   <pre>
-    Welcome to the Udacity Readable API!
+    <h3>Welcome to the Readable API!</h3>
 
-    Use an Authorization header to work with your own data:
+    <b>This API expect an Authorization header:</b>
+      fetch(url, { headers: { 'Authorization': 'whatever-you-want' }})
 
-    fetch(url, { headers: { 'Authorization': 'whatever-you-want' }})
-
-    The following endpoints are available:
-
-    GET /categories
+    <h3>The following endpoints are available:</h3>
+    <b>GET /categories</b>
       USAGE:
         Get all of the categories available for the app. List is found in categories.js.
         Feel free to extend this list as you desire.
 
-    GET /:category/posts
+    <b>GET /:category/posts</b>
       USAGE:
         Get all of the posts for a particular category
 
-    GET /posts
+    <b>GET /posts</b>
       USAGE:
         Get all of the posts. Useful for the main page when no category is selected.
 
-    POST /posts
+    <b>POST /posts</b>
       USAGE:
         Add a new post
 
@@ -50,33 +48,33 @@ app.get('/', (req, res) => {
         author - String
         category: Any of the categories listed in categories.js. Feel free to extend this list as you desire.
 
-    GET /posts/:id
+    <b>GET /posts/:id</b>
       USAGE:
         Get the details of a single post
 
-    POST /posts/:id
+    <b>POST /posts/:id</b>
       USAGE:
         Used for voting on a post
       PARAMS:
         option - String: Either "upVote" or "downVote"
 
-    PUT /posts/:id
+    <b>PUT /posts/:id</b>
       USAGE:
         Edit the details of an existing post
       PARAMS:
         title - String
         body - String
 
-    DELETE /posts/:id
+    <b>DELETE /posts/:id</b>
       USAGE:
         Sets the deleted flag for a post to 'true'.
         Sets the parentDeleted flag for all child comments to 'true'.
 
-    GET /posts/:id/comments
+    <b>GET /posts/:id/comments</b>
       USAGE:
         Get all the comments for a single post
 
-    POST /comments
+    <b>POST /comments</b>
       USAGE:
         Add a comment to a post
 
@@ -87,17 +85,17 @@ app.get('/', (req, res) => {
         author: String
         parentId: Should match a post id in the database.
 
-    GET /comments/:id
+    <b>GET /comments/:id</b>
       USAGE:
         Get the details for a single comment
 
-    POST /comments/:id
+    <b>POST /comments/:id</b>
       USAGE:
         Used for voting on a comment.
       PARAMS:
         option - String: Either "upVote" or "downVote"
 
-    PUT /comments/:id
+    <b>PUT /comments/:id</b>
       USAGE:
         Edit the details of an existing comment
 
@@ -105,7 +103,7 @@ app.get('/', (req, res) => {
         timestamp: timestamp. Get this however you want.
         body: String
 
-    DELETE /comments/:id
+    <b>DELETE /comments/:id</b>
       USAGE:
         Sets a comment's deleted flag to 'true'
  </pre>

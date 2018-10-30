@@ -14,8 +14,8 @@ It's a reddit clone, where users will be able to...
 
 * Install and start the API server
     - `cd api-server`
-    - `npm install`
-    - `node server`
+    - `yarn install`
+    - `node server` or `yarn start`
 * In another terminal window, install and start the front-end
     - `cd frontend`
     - `yarn install`
