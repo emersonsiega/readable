@@ -25,4 +25,4 @@ It's a reddit clone, where users will be able to...
 Information about the API server and how to use it can be found in its [README file](api-server/README.md).
 
 ## Front-end  
-Information about the front-end it's [here]().
+Information about the front-end it's [here](frontend/README.md).
