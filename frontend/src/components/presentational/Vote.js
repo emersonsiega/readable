@@ -52,15 +52,17 @@ const Vote = ({voteScore = 0, onVoteUp, onVoteDown, voted = ''}) => {
     )
 }
 
-Vote.propTypes = {
+export const VotePropTypes = {
     voteScore: PropTypes.number,
     onVoteUp: PropTypes.func.isRequired,
     onVoteDown: PropTypes.func.isRequired,
     voted: PropTypes.oneOf([
-        VOTED_UP, 
+        VOTED_UP,
         VOTED_DOWN,
         ''
     ])
 }
+
+Vote.propTypes = {...VotePropTypes}
 
 export default Vote
