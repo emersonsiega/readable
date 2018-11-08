@@ -14,7 +14,7 @@ export const themes = {
     light: {
         background: '#f2f2f2',
         color: '#333', 
-        foreground: '#4f4f4f',
+        foreground: '#dedede',
         link: '#6fcf97',
         linkColor: '#333',
         headerBackground: '#6fcf97',
