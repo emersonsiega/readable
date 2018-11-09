@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 
 import ThemeProvider from '../presentational/theme/ThemeProvider'
 import {
-  GlobalStyle, Button
+  GlobalStyle, Button, HeaderTitle
 } from '../presentational/theme/ThemedComponents'
 import Post from '../presentational/Post'
 import { VOTED_UP, VOTED_DOWN } from '../../types'
@@ -41,7 +41,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <div style={{margin: '20px'}}>
         <GlobalStyle />
-        <h3>Readable App</h3>
+        <HeaderTitle>Readable App</HeaderTitle>
         <Button onClick={() => {setTheme(theme === 'light' ? 'dark' : 'light') }}>
           {theme === 'light' ? 'DARK' : 'LIGHT'}
         </Button>

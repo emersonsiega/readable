@@ -1,5 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
+import "typeface-roboto"
+import "typeface-playball"
 
 import App from './components/container/App'
 import * as serviceWorker from './serviceWorker'

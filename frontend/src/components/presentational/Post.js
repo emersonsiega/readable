@@ -11,7 +11,7 @@ import {
 } from '../presentational/theme/ThemedComponents'
 import { postType } from '../../types'
 
-const PostContainer = styled.div`
+const PostContainer = styled.article`
     background: ${props => props.theme.foreground};
     color: ${props => props.theme.color};
     height: 9em;
@@ -76,6 +76,7 @@ const Detail = styled.label`
     font-size: 1em;
     font-style: italic;
     padding-left: 10px;
+    font-weight: 300;
 `
 
 const Post = ({ title, voteScore, author, timestamp, onVoteDown, onVoteUp, voted, commentCount }) => {
