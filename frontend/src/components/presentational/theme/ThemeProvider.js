@@ -1,6 +1,8 @@
 import React from 'react'
 import { ThemeProvider as Provider } from 'styled-components'
 
+import GlobalStyle from './GlobalStyle'
+
 export const themes = {
     dark: {
         background: '#242424',
@@ -27,7 +29,10 @@ const ThemeProvider = (props) => {
 
     return (
         <Provider theme={themes[theme]}>
-            {props.children}
+            <>
+                <GlobalStyle />
+                {props.children}
+            </>
         </Provider>
     )
 }

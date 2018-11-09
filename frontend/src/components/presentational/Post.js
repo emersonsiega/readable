@@ -1,14 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import {
-    FaComments
-} from 'react-icons/fa'
+import { FaComments } from 'react-icons/fa'
 
 import Vote from './Vote'
 import dateTimeFormatter from '../../utils/DateTimeHelper'
-import {
-    Icon
-} from '../presentational/theme/ThemedComponents'
+import { Icon } from './Components'
 import { postType } from '../../types'
 
 const PostContainer = styled.article`

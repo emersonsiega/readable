@@ -1,12 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import {
-    FaChevronUp,
-    FaChevronDown
-} from 'react-icons/fa'
+import { FaChevronUp, FaChevronDown } from 'react-icons/fa'
 
-import { Icon } from '../presentational/theme/ThemedComponents'
+import { Icon } from './Components'
 import { 
     voteType, 
     VOTED_DOWN, 
@@ -33,7 +30,7 @@ const VoteScore = styled.label`
     margin-left: 5px;
 `
 
-const Vote = ({voteScore = 0, onVoteUp, onVoteDown, voted = VOTE_NONE}) => {
+const Vote = ({voteScore, onVoteUp, onVoteDown, voted = VOTE_NONE}) => {
     return (
         <VoteContainer>
             <VoteUpDown>
@@ -50,5 +47,9 @@ const Vote = ({voteScore = 0, onVoteUp, onVoteDown, voted = VOTE_NONE}) => {
 }
 
 Vote.propTypes = { ...voteType }
+
+Vote.defaultProps = {
+    voteScore: 0
+}
 
 export default Vote

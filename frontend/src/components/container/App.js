@@ -1,11 +1,10 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 
 import ThemeProvider from '../presentational/theme/ThemeProvider'
-import {
-  GlobalStyle, Button, HeaderTitle
-} from '../presentational/theme/ThemedComponents'
-import Post from '../presentational/Post'
+import { Button, AppTitle } from '../presentational/Components'
 import { VOTED_UP, VOTED_DOWN } from '../../types'
+
+import Post from '../presentational/Post'
 
 const App = () => {
   const [theme, setTheme] = useState('dark')
@@ -40,8 +39,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <div style={{margin: '20px'}}>
-        <GlobalStyle />
-        <HeaderTitle>Readable App</HeaderTitle>
+        <AppTitle>Readable App</AppTitle>
         <Button onClick={() => {setTheme(theme === 'light' ? 'dark' : 'light') }}>
           {theme === 'light' ? 'DARK' : 'LIGHT'}
         </Button>

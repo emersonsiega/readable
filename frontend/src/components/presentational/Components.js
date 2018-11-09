@@ -1,16 +1,4 @@
-import styled, { createGlobalStyle } from 'styled-components'
-
-const GlobalStyle = createGlobalStyle`
-    body {
-        background: ${props => props.theme.background};
-        color: ${props => props.theme.color};
-        margin: 0;
-        padding: 0;
-        font-family: Roboto, sans-serif;
-        line-height: 1.5;
-        scroll-behavior: smooth;
-    }
-`
+import styled from 'styled-components'
 
 const Button = styled.button`
     background: ${props => props.theme.link};
@@ -26,7 +14,7 @@ const Button = styled.button`
     }
 `
 
-const HeaderTitle = styled.h1`
+const AppTitle = styled.h1`
     font-family: 'Playball',cursive;
     font-weight: 300;
     color: ${({theme}) => theme.headerColor};
@@ -42,8 +30,7 @@ const Icon = styled.div`
 `
 
 export {
-    GlobalStyle,
+    AppTitle,
     Button,
     Icon,
-    HeaderTitle,
 }
