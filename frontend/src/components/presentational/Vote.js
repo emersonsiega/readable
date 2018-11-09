@@ -1,11 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
-import PropTypes from 'prop-types'
 
 import {
     FaChevronUp,
     FaChevronDown
 } from 'react-icons/fa'
+
+import { Icon } from '../presentational/theme/ThemedComponents'
+import { 
+    voteType, 
+    VOTED_DOWN, 
+    VOTED_UP, 
+    VOTE_NONE 
+} from '../../types'
 
 const VoteContainer = styled.div`
     display: flex;
@@ -21,48 +28,27 @@ const VoteUpDown = styled.div`
     justify-content: space-between;
 `
 
-const VoteIcon = styled.div`
-    color: ${props => props.voted === true
-        ? props.theme.link
-        : props.theme.color};
-    cursor: pointer;
-`
-
 const VoteScore = styled.label`
     font-size: 3em;
     margin-left: 5px;
 `
 
-export const VOTED_UP = 'up'
-export const VOTED_DOWN = 'down'
-
-const Vote = ({voteScore = 0, onVoteUp, onVoteDown, voted = ''}) => {
+const Vote = ({voteScore = 0, onVoteUp, onVoteDown, voted = VOTE_NONE}) => {
     return (
         <VoteContainer>
             <VoteUpDown>
-                <VoteIcon voted={ voted === VOTED_UP }>
+                <Icon highlight={ voted === VOTED_UP }>
                     <FaChevronUp onClick={() => onVoteUp()} />
-                </VoteIcon>
-                <VoteIcon voted={ voted === VOTED_DOWN }>
+                </Icon>
+                <Icon highlight={ voted === VOTED_DOWN }>
                     <FaChevronDown onClick={() => onVoteDown()} />
-                </VoteIcon>
+                </Icon>
             </VoteUpDown>
             <VoteScore>{voteScore}</VoteScore>
         </VoteContainer>
     )
 }
 
-export const VotePropTypes = {
-    voteScore: PropTypes.number,
-    onVoteUp: PropTypes.func.isRequired,
-    onVoteDown: PropTypes.func.isRequired,
-    voted: PropTypes.oneOf([
-        VOTED_UP,
-        VOTED_DOWN,
-        ''
-    ])
-}
-
-Vote.propTypes = {...VotePropTypes}
+Vote.propTypes = { ...voteType }
 
 export default Vote
