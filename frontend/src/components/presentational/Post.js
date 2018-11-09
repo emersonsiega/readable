@@ -1,12 +1,15 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import {
     FaComments
 } from 'react-icons/fa'
 
-import Vote, {VotePropTypes} from './Vote'
+import Vote from './Vote'
 import dateTimeFormatter from '../../utils/DateTimeHelper'
+import {
+    Icon
+} from '../presentational/theme/ThemedComponents'
+import { postType } from '../../types'
 
 const PostContainer = styled.div`
     background: ${props => props.theme.foreground};
@@ -18,6 +21,11 @@ const PostContainer = styled.div`
     border-radius: 5px;
     display: flex;
     flex-direction: row;
+    cursor: pointer;
+
+    &:hover {
+        box-shadow: 0px 0px 10px ${props => props.theme.foreground};
+    }
 `
 
 const ActionsContainer = styled.div`
@@ -33,7 +41,6 @@ const CommentsContainer = styled.div`
     flex-direction: row;
     font-size: 2em;
     align-items: baseline;
-    cursor: pointer;
 `
 
 const CommentsLabel = styled.label`
@@ -82,28 +89,24 @@ const Post = ({ title, voteScore, author, timestamp, onVoteDown, onVoteUp, voted
                     voted={voted}
                 />
                 <CommentsContainer>
-                    <FaComments />
+                    <Icon highlight={commentCount !== 0}>
+                        <FaComments />
+                    </Icon>
                     <CommentsLabel>{commentCount}</CommentsLabel>
                 </CommentsContainer>
             </ActionsContainer>
             <InfoContainer>
                 <Title>{title}</Title>
                 <PostDetails>
-                    <Detail>{author}</Detail>
                     <Detail>{dateTimeFormatter(timestamp)}</Detail>
+                    <Detail>{author}</Detail>
                 </PostDetails>
             </InfoContainer>
         </PostContainer>
     )
 }
 
-Post.propTypes = {
-    title: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired,
-    timestamp: PropTypes.any.isRequired,
-    commentCount: PropTypes.number,
-    ...VotePropTypes,
-}
+Post.propTypes = { ...postType }
 
 Post.defaultProps = {
     voteScore: 0,
