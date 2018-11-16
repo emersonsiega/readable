@@ -5,6 +5,7 @@ import { handleFetchData } from '../../store/actions/shared'
 
 import ThemeProvider from './theme/ThemeProvider'
 import NavContainer from './NavContainer'
+import MainContainer from '../presentational/MainContainer'
 import PostContainer from './PostContainer'
 
 class App extends Component {
@@ -17,9 +18,12 @@ class App extends Component {
     return (
       <ThemeProvider>
         <NavContainer />
-        <div style={{ marginTop: '70px' }}>
-          <PostContainer></PostContainer>
-        </div>
+        <MainContainer >
+          <PostContainer />
+          {/* <Post /> */}
+          {/* <NewPost /> */}
+        </MainContainer>
+        {/* <NotFound /> */}
       </ThemeProvider>
     )
   }

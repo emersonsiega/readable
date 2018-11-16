@@ -39,25 +39,29 @@ const ThemeToggler = styled.div`
     font-size: 1.7em;
 `
 
-const Nav = (props) => (
-    <NavHeader>
-        <AppTitle>Readable</AppTitle>
+const IconRotateColored = styled(IconRotate)`
+    color: ${props => props.theme.color};
+`
 
-        <ThemeToggler onClick={() => props.toggleTheme()}>
-            {props.theme === THEME_LIGHT 
-                ? 
-                    <IconRotate degress={-20}>
-                        <FaRegMoon />
-                    </IconRotate> 
-                : 
-                    <IconRotate degress={-20}>
-                        <FaMoon />
-                    </IconRotate> 
-            }
-        </ThemeToggler>
+const Nav = (props) => {
+    const handleThemeToggle = () => {
+        props.toggleTheme()
+    }
 
-    </NavHeader>
-)
+    return (
+        <NavHeader>
+            <AppTitle>Readable</AppTitle>
+            <ThemeToggler>
+                <IconRotateColored degress={-20} onClick={handleThemeToggle}>
+                    {props.theme === THEME_LIGHT 
+                        ? <FaRegMoon />
+                        : <FaMoon />
+                    }
+                </IconRotateColored> 
+            </ThemeToggler>
+        </NavHeader>
+    )
+}
 
 Nav.propTypes = { ...navType }
 
