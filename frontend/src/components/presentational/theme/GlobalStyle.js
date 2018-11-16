@@ -9,6 +9,8 @@ const GlobalStyle = createGlobalStyle`
         font-family: Roboto, sans-serif;
         line-height: 1.5;
         scroll-behavior: smooth;
+
+        transition: background-color 0.8s ease;
     }
 `
 

@@ -16,6 +16,8 @@ const NavHeader = styled.div`
     flex-direction: row;
     align-items: center;
     box-shadow: 0px 0px 10px 0px ${props => props.theme.background};
+
+    transition: background-color 0.3s ease;
 `
 
 const AppTitle = styled.h1`

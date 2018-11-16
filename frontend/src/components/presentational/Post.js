@@ -22,6 +22,8 @@ const PostContainer = styled.article`
     &:hover {
         box-shadow: 0px 0px 10px ${props => props.theme.foreground};
     }
+
+    transition: background-color 0.8s ease;
 `
 
 const ActionsContainer = styled.div`
