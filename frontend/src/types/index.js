@@ -32,10 +32,20 @@ const voteType = {
     ])
 }
 
+const THEME_LIGHT = 'light'
+const THEME_DARK = 'dark'
+
+const navType = {
+    toggleTheme: func.isRequired
+}
+
 export {
     postType,
     voteType,
     VOTED_UP,
     VOTED_DOWN, 
     VOTE_NONE,
+    THEME_LIGHT,
+    THEME_DARK,
+    navType,
 }

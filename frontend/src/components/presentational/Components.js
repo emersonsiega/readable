@@ -14,23 +14,32 @@ const Button = styled.button`
     }
 `
 
-const AppTitle = styled.h1`
-    font-family: 'Playball',cursive;
-    font-weight: 300;
-    color: ${({theme}) => theme.headerColor};
-    margin: 0;
-    padding: 0;
-`
-
 const Icon = styled.div`
     color: ${props => props.highlight === true
         ? props.theme.link
         : props.theme.color};
     cursor: pointer;
+    display: flex;
+    transition: 0.2s linear;
+
+    &:hover {
+        color: ${props => props.theme.hover};
+        transition: 0.2s linear;
+    }
+`
+
+const IconRotate = styled(Icon)`
+    transition: transform 300ms ease-in-out;
+
+    &:hover {
+        transform: rotate(${props => props.degress 
+            ? props.degress 
+            : 0 }deg);
+    }
 `
 
 export {
-    AppTitle,
     Button,
     Icon,
+    IconRotate,
 }

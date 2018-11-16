@@ -1,33 +1,28 @@
-import React, { useState, useEffect } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { handleFetchPosts } from '../../store/actions/posts'
+import { handleFetchData } from '../../store/actions/shared'
 
-import ThemeProvider from '../presentational/theme/ThemeProvider'
-import { Button, AppTitle } from '../presentational/Components'
-import PostContainer from '../container/PostContainer'
+import ThemeProvider from './theme/ThemeProvider'
+import NavContainer from './NavContainer'
+import PostContainer from './PostContainer'
 
-const App = (props) => {
-  const [theme, setTheme] = useState('dark')
+class App extends Component {
+  componentDidMount() {
+    const { dispatch } = this.props
+    dispatch(handleFetchData())
+  }
 
-  useEffect(() => {
-    const { dispatch } = props
-    dispatch(handleFetchPosts())
-  })
-
-  return (
-    <ThemeProvider theme={theme}>
-      <div style={{margin: '20px'}}>
-        <AppTitle>Readable App</AppTitle>
-        <Button onClick={() => {setTheme(theme === 'light' ? 'dark' : 'light') }}>
-          {theme === 'light' ? 'DARK' : 'LIGHT'}
-        </Button>
-
-        <PostContainer></PostContainer>
-        
-      </div>
-    </ThemeProvider>
-  )
+  render() {
+    return (
+      <ThemeProvider>
+        <NavContainer />
+        <div style={{ marginTop: '70px' }}>
+          <PostContainer></PostContainer>
+        </div>
+      </ThemeProvider>
+    )
+  }
 }
 
 export default connect()(App)
