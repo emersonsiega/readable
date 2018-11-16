@@ -1,13 +1,17 @@
 import React from 'react'
 import { render } from 'react-dom'
+import { Provider } from 'react-redux'
 import "typeface-roboto"
 import "typeface-playball"
 
+import store from './store'
 import App from './components/container/App'
 import * as serviceWorker from './serviceWorker'
 
 render(
-    <App />,
+    <Provider store={store}>
+        <App />
+    </Provider>,
     document.getElementById('root')
 )
 
