@@ -4,7 +4,7 @@ import { FaComments } from 'react-icons/fa'
 
 import Vote from './Vote'
 import dateTimeFormatter from '../../utils/DateTimeHelper'
-import { Icon } from './Components'
+import { IconZoom } from './Components'
 import { postType } from '../../types'
 
 const PostContainer = styled.article`
@@ -77,33 +77,31 @@ const Detail = styled.label`
     font-weight: 300;
 `
 
-const Post = ({ title, voteScore, author, timestamp, onVoteDown, onVoteUp, voted, commentCount }) => {
-    return (
-        <PostContainer>
-            <ActionsContainer>
-                <Vote 
-                    onVoteDown={onVoteDown}
-                    onVoteUp={onVoteUp}
-                    voteScore={voteScore}
-                    voted={voted}
-                />
-                <CommentsContainer>
-                    <Icon highlight={commentCount !== 0}>
-                        <FaComments />
-                    </Icon>
-                    <CommentsLabel>{commentCount}</CommentsLabel>
-                </CommentsContainer>
-            </ActionsContainer>
-            <InfoContainer>
-                <Title>{title}</Title>
-                <PostDetails>
-                    <Detail>{dateTimeFormatter(timestamp)}</Detail>
-                    <Detail>{author}</Detail>
-                </PostDetails>
-            </InfoContainer>
-        </PostContainer>
-    )
-}
+const Post = ({ title, voteScore, author, timestamp, onVoteDown, onVoteUp, voted, commentCount }) => (
+    <PostContainer>
+        <ActionsContainer>
+            <Vote 
+                onVoteDown={onVoteDown}
+                onVoteUp={onVoteUp}
+                voteScore={voteScore}
+                voted={voted}
+            />
+            <CommentsContainer>
+                <IconZoom highlight={commentCount !== 0}>
+                    <FaComments />
+                </IconZoom>
+                <CommentsLabel>{commentCount}</CommentsLabel>
+            </CommentsContainer>
+        </ActionsContainer>
+        <InfoContainer>
+            <Title>{title}</Title>
+            <PostDetails>
+                <Detail>{dateTimeFormatter(timestamp)}</Detail>
+                <Detail>{author}</Detail>
+            </PostDetails>
+        </InfoContainer>
+    </PostContainer>
+)
 
 Post.propTypes = { ...postType }
 

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { FaChevronUp, FaChevronDown } from 'react-icons/fa'
 
-import { Icon } from './Components'
+import { IconZoom } from './Components'
 import { 
     voteType, 
     VOTED_DOWN, 
@@ -34,12 +34,12 @@ const Vote = ({voteScore, onVoteUp, onVoteDown, voted = VOTE_NONE}) => {
     return (
         <VoteContainer>
             <VoteUpDown>
-                <Icon highlight={ voted === VOTED_UP }>
+                <IconZoom highlight={ voted === VOTED_UP }>
                     <FaChevronUp onClick={() => onVoteUp()} />
-                </Icon>
-                <Icon highlight={ voted === VOTED_DOWN }>
+                </IconZoom>
+                <IconZoom highlight={ voted === VOTED_DOWN }>
                     <FaChevronDown onClick={() => onVoteDown()} />
-                </Icon>
+                </IconZoom>
             </VoteUpDown>
             <VoteScore>{voteScore}</VoteScore>
         </VoteContainer>

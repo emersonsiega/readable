@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import { handleFetchData } from '../../store/actions/shared'
-
 import ThemeProvider from './theme/ThemeProvider'
 import NavContainer from './NavContainer'
 import MainContainer from '../presentational/MainContainer'

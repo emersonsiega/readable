@@ -7,7 +7,7 @@ import {
 } from 'prop-types'
 
 const postType = {
-    id: number,
+    id: string,
     title: string.isRequired,
     author: string.isRequired,
     body: string,

@@ -1,16 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import {
+    TransitionGroup
+} from 'react-transition-group'
 
 import Post from '../presentational/Post'
+import { Fade } from '../presentational/Components'
 
-const PostContainer = (props) => {
-    const {posts = []} = props
-
-    return (
-        <div>
-            {posts.map( post => post.deleted === false && (
+const PostContainer = ({posts = []}) => (
+    <TransitionGroup>
+        {posts.map( (post, i) => post.deleted === false && (
+            <Fade key={post.id} timeout={500 + i * 1000} time={500 + i*1000}>
                 <Post 
-                    key={post.id}
+                    id={post.id}
                     title={post.title}
                     author={post.author}
                     timestamp={post.timestamp}
@@ -20,10 +22,10 @@ const PostContainer = (props) => {
                     commentCount={post.commentCount}
                     voted={''}
                 />
-            ) )}
-        </div>
-    )
-}
+            </Fade>
+        ) )}
+    </TransitionGroup>
+)
 
 const mapStateToProps = ({posts}) => ({
     posts: Object.values(posts)

@@ -6,12 +6,20 @@ import SideContainer from './SideContainer'
 const Content = styled.section`
     margin: 65px 20px 0px 20px;
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+`
+
+const Children = styled.div`
+    display: flex;
     flex-grow: 2;
 `
 
 const MainContainer = (props) =>  (
     <Content>
-        {props.children}
+        <Children>
+            {props.children}
+        </Children>
         <SideContainer />
     </Content>
 )
