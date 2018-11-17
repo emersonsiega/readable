@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Switch, Route } from 'react-router-dom'
 
 import { handleFetchData } from '../../store/actions/shared'
 import ThemeProvider from './theme/ThemeProvider'
 import NavContainer from './NavContainer'
 import MainContainer from '../presentational/MainContainer'
-import PostContainer from './PostContainer'
+import PostsList from './PostsList'
 
 class App extends Component {
   componentDidMount() {
@@ -18,11 +19,13 @@ class App extends Component {
       <ThemeProvider>
         <NavContainer />
         <MainContainer >
-          <PostContainer />
-          {/* <Post /> */}
-          {/* <NewPost /> */}
+          <Switch>
+            <Route path='/' exact component={PostsList}></Route>
+            {/* <Post /> */}
+            {/* <NewPost /> */}
+            {/* <NotFound /> */}
+          </Switch>
         </MainContainer>
-        {/* <NotFound /> */}
       </ThemeProvider>
     )
   }

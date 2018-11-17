@@ -7,7 +7,7 @@ import {
 import Post from '../presentational/Post'
 import { Fade } from '../presentational/Components'
 
-const PostContainer = ({posts = []}) => (
+const PostsList = ({posts = []}) => (
     <TransitionGroup>
         {posts.map( (post, i) => post.deleted === false && (
             <Fade key={post.id} timeout={500 + i * 1000} time={500 + i*1000}>
@@ -31,4 +31,4 @@ const mapStateToProps = ({posts}) => ({
     posts: Object.values(posts)
 })
 
-export default connect(mapStateToProps)(PostContainer)
+export default connect(mapStateToProps)(PostsList)
