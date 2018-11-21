@@ -7,6 +7,7 @@ import ThemeProvider from './theme/ThemeProvider'
 import NavContainer from './NavContainer'
 import MainContainer from '../presentational/MainContainer'
 import PostsList from './PostsList'
+import PostContainer from './PostContainer'
 
 class App extends Component {
   componentDidMount() {
@@ -14,21 +15,19 @@ class App extends Component {
     dispatch(handleFetchData())
   }
 
-  render() {
-    return (
-      <ThemeProvider>
-        <NavContainer />
-        <MainContainer >
-          <Switch>
-            <Route path='/' exact component={PostsList}></Route>
-            {/* <Post /> */}
-            {/* <NewPost /> */}
-            {/* <NotFound /> */}
-          </Switch>
-        </MainContainer>
-      </ThemeProvider>
-    )
-  }
+  render = () => (
+    <ThemeProvider>
+      <NavContainer />
+      <MainContainer>
+        <Switch>
+          <Route path='/' exact component={() => <PostsList />} />
+          <Route path='/:category/:post_id' component={() => <PostContainer />} />
+          {/* <Post /> */}
+          {/* <NotFound /> */}
+        </Switch>
+      </MainContainer>
+    </ThemeProvider>
+  )
 }
 
 export default connect()(App)

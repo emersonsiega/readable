@@ -35,10 +35,10 @@ const Vote = ({voteScore, onVoteUp, onVoteDown, voted = VOTE_NONE}) => {
         <VoteContainer>
             <VoteUpDown>
                 <IconZoom highlight={ voted === VOTED_UP }>
-                    <FaChevronUp onClick={() => onVoteUp()} />
+                    <FaChevronUp onClick={onVoteUp} />
                 </IconZoom>
                 <IconZoom highlight={ voted === VOTED_DOWN }>
-                    <FaChevronDown onClick={() => onVoteDown()} />
+                    <FaChevronDown onClick={onVoteDown} />
                 </IconZoom>
             </VoteUpDown>
             <VoteScore>{voteScore}</VoteScore>

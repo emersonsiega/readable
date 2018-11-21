@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import transition from "styled-transition-group"
+import { Link as RouterLink } from 'react-router-dom'
 
 const Button = styled.button`
     background: ${props => props.theme.link};
@@ -51,9 +52,16 @@ const Fade = transition.div`
   }
 `
 
+const Link = styled(RouterLink)`
+    color: inherit;
+    text-decoration: inherit;
+    cursor: pointer;
+`
+
 export {
     Button,
     Icon,
     IconZoom,
     Fade,
+    Link
 }

@@ -1,23 +1,23 @@
 import React from 'react'
 import styled from 'styled-components'
 import { FaComments } from 'react-icons/fa'
+import { withRouter } from 'react-router-dom'
 
 import Vote from './Vote'
 import dateTimeFormatter from '../../utils/DateTimeHelper'
-import { IconZoom } from './Components'
+import { IconZoom, Link } from './Components'
 import { postType } from '../../types'
 
 const PostContainer = styled.article`
     background: ${props => props.theme.foreground};
     color: ${props => props.theme.color};
-    height: 9em;
-    width: auto;
+    min-height: 9em;
+    width: 100%;
     padding: 10px;
     margin: 5px 0px 5px 0px;
     border-radius: 5px;
     display: flex;
     flex-direction: row;
-    cursor: pointer;
 
     &:hover {
         box-shadow: 0px 0px 10px ${props => props.theme.foreground};
@@ -29,7 +29,7 @@ const PostContainer = styled.article`
 const ActionsContainer = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: flex-start;
     width: 10%;
 `
@@ -77,31 +77,52 @@ const Detail = styled.label`
     font-weight: 300;
 `
 
-const Post = ({ title, voteScore, author, timestamp, onVoteDown, onVoteUp, voted, commentCount }) => (
-    <PostContainer>
-        <ActionsContainer>
-            <Vote 
-                onVoteDown={onVoteDown}
-                onVoteUp={onVoteUp}
-                voteScore={voteScore}
-                voted={voted}
-            />
-            <CommentsContainer>
-                <IconZoom highlight={commentCount !== 0}>
-                    <FaComments />
-                </IconZoom>
-                <CommentsLabel>{commentCount}</CommentsLabel>
-            </CommentsContainer>
-        </ActionsContainer>
-        <InfoContainer>
-            <Title>{title}</Title>
-            <PostDetails>
-                <Detail>{dateTimeFormatter(timestamp)}</Detail>
-                <Detail>{author}</Detail>
-            </PostDetails>
-        </InfoContainer>
-    </PostContainer>
-)
+const Body = styled.p`
+    font-size: 1em;
+    min-height: 100px;
+`
+
+const Post = (props) => {
+    const {
+        id, title, body, voteScore, 
+        author, timestamp, onVoteDown,
+        onVoteUp, voted, commentCount, 
+        category
+    } = props
+
+    const showComplete = props.match.params.post_id !== undefined
+
+    return (
+        <PostContainer>
+            <ActionsContainer>
+                <Vote 
+                    onVoteDown={onVoteDown}
+                    onVoteUp={onVoteUp}
+                    voteScore={voteScore}
+                    voted={voted}
+                />
+                <CommentsContainer>
+                    <IconZoom highlight={commentCount !== 0}>
+                        <FaComments />
+                    </IconZoom>
+                    <CommentsLabel>{commentCount}</CommentsLabel>
+                </CommentsContainer>
+            </ActionsContainer>
+            <InfoContainer>
+                {showComplete === true 
+                    ? <>
+                        <Title>{title}</Title>
+                        <Body>{body}</Body>
+                    </>
+                    : <Title><Link to={`/${category}/${id}`}>{title}</Link></Title>}
+                <PostDetails>
+                    <Detail>{dateTimeFormatter(timestamp)}</Detail>
+                    <Detail>{author}</Detail>
+                </PostDetails>
+            </InfoContainer>
+        </PostContainer>
+    )
+}
 
 Post.propTypes = { ...postType }
 
@@ -110,4 +131,4 @@ Post.defaultProps = {
     commentCount: 0,
 }
 
-export default Post
+export default withRouter(Post)
