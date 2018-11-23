@@ -11,7 +11,9 @@ const comments = (state = {}, action) => {
         case FETCH_COMMENTS_BY_POST:
             return {
                 ...state,
-                ...action.comments.reduce((acc, c) => Object.assign({}, comment(acc), comment(c)))
+                [action.post_id]: {
+                    ...action.comments.reduce((acc, c) => Object.assign({}, comment(acc), comment(c)))
+                }
             }
         default:
             return state
