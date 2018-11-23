@@ -14,6 +14,16 @@ const handleVoteDown = (e) => {
     alert('vote Down')
 }
 
+const handleDelete = (e) => {
+    e.preventDefault()
+    alert('deleted')
+}
+
+const handleEdit = (e) => {
+    e.preventDefault()
+    alert('edited')
+}
+
 const PostContainer = ({post = {}}) => (
     <Post 
         id={post.id}
@@ -23,6 +33,8 @@ const PostContainer = ({post = {}}) => (
         timestamp={post.timestamp}
         onVoteDown={handleVoteDown}
         onVoteUp={handleVoteUp}
+        onDelete={handleDelete}
+        onEdit={handleEdit}
         voteScore={post.voteScore}
         commentCount={post.commentCount}
         category={post.category}
@@ -33,7 +45,7 @@ const PostContainer = ({post = {}}) => (
 const mapStateToProps = ({ posts }, {id, match}) => ({
     post: {
         ...posts[match.params.post_id || id]
-    }
+    },
 })
 
 export default withRouter(connect(mapStateToProps)(PostContainer))

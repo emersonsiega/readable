@@ -15,7 +15,9 @@ const postType = {
     voteScore: number,
     category: string,
     deleted: bool,
-    commentCount: number
+    commentCount: number,
+    onDelete: func.isRequired,
+    onEdit: func.isRequired,
 }
 
 const VOTED_UP = 'up'

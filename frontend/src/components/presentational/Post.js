@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { FaComments } from 'react-icons/fa'
+import { FaComments, FaRegEdit, FaTrashAlt } from 'react-icons/fa'
 import { withRouter } from 'react-router-dom'
 
 import Vote from './Vote'
@@ -72,9 +72,11 @@ const IconZoomBig = styled(IconZoom)`
     font-size: 2em;
 `
 
-const Comments = styled.div`
+const Actions = styled.div`
     display: flex;
-    align-items: flex-end;  
+    flex-direction: row;
+    align-items: flex-end;
+    margin-right: auto;
 `
 
 const Post = (props) => {
@@ -82,10 +84,11 @@ const Post = (props) => {
         id, title, body, voteScore, 
         author, timestamp, onVoteDown,
         onVoteUp, voted, commentCount, 
-        category
+        category, onEdit, onDelete
     } = props
 
-    const isCompactMode = props.match.params.post_id !== undefined
+    const compactMode = props.match.params.post_id !== undefined
+    const isCompactMode = () => compactMode === true
 
     return (
         <PostContainer>
@@ -96,20 +99,31 @@ const Post = (props) => {
                     voteScore={voteScore}
                     voted={voted}
                 />
-                {isCompactMode === true
+                {isCompactMode()
                     ? <Title>{title}</Title>
-                    : <Title><Link to={`/${category}/${id}`}>{title}</Link></Title>}
+                    : <Title><Link to={`/${category}/${id}`}>{title}</Link></Title>
+                }
             </Header>
-            {isCompactMode === true && (
+            {isCompactMode() && (
                 <Body>{body}</Body>
             )}
             <Footer>
-                <Comments>
-                    <IconZoomBig highlight={commentCount !== 0}>
-                        <FaComments />
-                    </IconZoomBig>
-                    <CommentsLabel>{commentCount}</CommentsLabel>
-                </Comments>
+                {isCompactMode() 
+                    ? (
+                        <Actions>
+                            <IconZoomBig><FaRegEdit onClick={onEdit}/></IconZoomBig>
+                            <IconZoomBig><FaTrashAlt onClick={onDelete}/></IconZoomBig>
+                        </Actions>
+                    )
+                    : (
+                        <Actions>
+                            <IconZoomBig highlight={commentCount !== 0}>
+                                <FaComments />
+                            </IconZoomBig>
+                            <CommentsLabel>{commentCount}</CommentsLabel>
+                        </Actions>
+                    )
+                }
                 <FooterRight>
                     <Detail>{author}</Detail>
                     <Detail>{dateTimeFormatter(timestamp)}</Detail>
@@ -117,37 +131,6 @@ const Post = (props) => {
             </Footer>
         </PostContainer>
     )
-
-    // return (
-    //     <PostContainer>
-    //         <ActionsContainer>
-    //             <Vote 
-    //                 onVoteDown={onVoteDown}
-    //                 onVoteUp={onVoteUp}
-    //                 voteScore={voteScore}
-    //                 voted={voted}
-    //             />
-    //             <CommentsContainer>
-    //                 <IconZoom highlight={commentCount !== 0}>
-    //                     <FaComments />
-    //                 </IconZoom>
-    //                 <CommentsLabel>{commentCount}</CommentsLabel>
-    //             </CommentsContainer>
-    //         </ActionsContainer>
-    //         <InfoContainer>
-    //             {isCompactMode === true 
-    //                 ? <>
-    //                     <Title>{title}</Title>
-    //                     <Body>{body}</Body>
-    //                 </>
-    //                 : <Title><Link to={`/${category}/${id}`}>{title}</Link></Title>}
-    //             <PostDetails>
-    //                 <Detail>{dateTimeFormatter(timestamp)}</Detail>
-    //                 <Detail>{author}</Detail>
-    //             </PostDetails>
-    //         </InfoContainer>
-    //     </PostContainer>
-    // )
 }
 
 Post.propTypes = { ...postType }
