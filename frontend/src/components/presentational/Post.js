@@ -5,42 +5,18 @@ import { withRouter } from 'react-router-dom'
 
 import Vote from './Vote'
 import dateTimeFormatter from '../../utils/DateTimeHelper'
-import { IconZoom, Link } from './Components'
+import { 
+    IconZoom, 
+    Link, 
+    PostContainer, 
+    PostHeader, 
+    PostFooter, 
+    PostFooterRight, 
+    PostDetail,
+    PostBody,
+    PostActions,
+} from './Components'
 import { postType } from '../../types'
-
-const PostContainer = styled.article`
-    background: ${props => props.theme.foreground};
-    color: ${props => props.theme.color};
-    min-height: 9em;
-    max-width: 100%;
-    padding: 10px;
-    margin: 5px 0px 5px 0px;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: background-color 0.8s ease;
-
-    &:hover {
-        box-shadow: 0px 0px 10px ${props => props.theme.foreground};
-    }
-`
-
-const Header = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-`
-
-const Footer = styled.div`
-    display: flex;
-    align-items: flex-end;
-    margin-top: 10px;
-`
-
-const FooterRight = styled.div`
-    margin-left: auto;
-`
 
 const CommentsLabel = styled.label`
     font-size: 1em;
@@ -55,28 +31,8 @@ const Title = styled.label`
     margin-right: auto;
 `
 
-const Detail = styled.label`
-    font-size: 1em;
-    font-style: italic;
-    padding-left: 10px;
-    font-weight: 300;
-`
-
-const Body = styled.p`
-    font-size: 1em;
-    min-height: 200px;
-    margin-bottom: auto;
-`
-
 const IconZoomBig = styled(IconZoom)`
     font-size: 2em;
-`
-
-const Actions = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    margin-right: auto;
 `
 
 const Post = (props) => {
@@ -90,9 +46,11 @@ const Post = (props) => {
     const compactMode = props.match.params.post_id !== undefined
     const isCompactMode = () => compactMode === true
 
+    const LinkToPost = (props) => <Link to={`/${category}/${id}`}>{props.children}</Link>
+
     return (
         <PostContainer>
-            <Header>
+            <PostHeader>
                 <Vote
                     onVoteDown={onVoteDown}
                     onVoteUp={onVoteUp}
@@ -101,34 +59,36 @@ const Post = (props) => {
                 />
                 {isCompactMode()
                     ? <Title>{title}</Title>
-                    : <Title><Link to={`/${category}/${id}`}>{title}</Link></Title>
+                    : <Title><LinkToPost>{title}</LinkToPost></Title>
                 }
-            </Header>
+            </PostHeader>
             {isCompactMode() && (
-                <Body>{body}</Body>
+                <PostBody>{body}</PostBody>
             )}
-            <Footer>
+            <PostFooter>
                 {isCompactMode() 
                     ? (
-                        <Actions>
+                        <PostActions>
                             <IconZoomBig><FaRegEdit onClick={onEdit}/></IconZoomBig>
                             <IconZoomBig><FaTrashAlt onClick={onDelete}/></IconZoomBig>
-                        </Actions>
+                        </PostActions>
                     )
                     : (
-                        <Actions>
-                            <IconZoomBig highlight={commentCount !== 0}>
-                                <FaComments />
-                            </IconZoomBig>
+                        <PostActions>
+                            <LinkToPost>
+                                <IconZoomBig highlight={commentCount !== 0}>
+                                    <FaComments />
+                                </IconZoomBig>
+                            </LinkToPost>
                             <CommentsLabel>{commentCount}</CommentsLabel>
-                        </Actions>
+                        </PostActions>
                     )
                 }
-                <FooterRight>
-                    <Detail>{author}</Detail>
-                    <Detail>{dateTimeFormatter(timestamp)}</Detail>
-                </FooterRight>
-            </Footer>
+                <PostFooterRight>
+                    <PostDetail>{author}</PostDetail>
+                    <PostDetail>{dateTimeFormatter(timestamp)}</PostDetail>
+                </PostFooterRight>
+            </PostFooter>
         </PostContainer>
     )
 }

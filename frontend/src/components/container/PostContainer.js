@@ -25,7 +25,7 @@ const handleEdit = (e) => {
 }
 
 const PostContainer = ({post = {}}) => (
-    <Post 
+    <Post
         id={post.id}
         title={post.title}
         body={post.body}

@@ -10,7 +10,7 @@ const postType = {
     id: string,
     title: string.isRequired,
     author: string.isRequired,
-    body: string,
+    body: string.isRequired,
     timestamp: number.isRequired,
     voteScore: number,
     category: string,
@@ -18,6 +18,17 @@ const postType = {
     commentCount: number,
     onDelete: func.isRequired,
     onEdit: func.isRequired,
+}
+
+const commentType = {
+    id: string,
+    parentId: string.isRequired,
+    author: string.isRequired,
+    body: string.isRequired,
+    timestamp: number.isRequired,
+    voteScore: number,
+    deleted: bool,
+    parentDeleted: bool,
 }
 
 const VOTED_UP = 'up'
@@ -43,6 +54,7 @@ const navType = {
 
 export {
     postType,
+    commentType,
     voteType,
     VOTED_UP,
     VOTED_DOWN, 

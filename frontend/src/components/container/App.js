@@ -7,7 +7,7 @@ import ThemeProvider from './theme/ThemeProvider'
 import NavContainer from './NavContainer'
 import MainContainer from '../presentational/MainContainer'
 import PostsList from './PostsList'
-import PostPage from './PostPage';
+import PostPageContainer from './PostPageContainer';
 
 class App extends Component {
   componentDidMount() {
@@ -21,7 +21,7 @@ class App extends Component {
       <MainContainer>
         <Switch>
           <Route path='/' exact component={PostsList} />
-          <Route path='/:category/:post_id' component={PostPage} />
+          <Route path='/:category/:post_id' component={PostPageContainer} />
           {/* <Post /> */}
           {/* <NotFound /> */}
         </Switch>

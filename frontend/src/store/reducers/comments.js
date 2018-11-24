@@ -6,15 +6,19 @@ const comment = (comment = {}) => ({
     }
 })
 
-const comments = (state = {}, action) => {
+const comments = (state = {}, action = { comments: [] }) => {
     switch(action.type) {
         case FETCH_COMMENTS_BY_POST:
-            return {
-                ...state,
-                [action.post_id]: {
-                    ...action.comments.reduce((acc, c) => Object.assign({}, comment(acc), comment(c)))
-                }
+            if ( action.comments.length !== 0 ) {
+                return {
+                    ...state,
+                    [action.post_id]: {
+                        ...action.comments.reduce((acc, c) => Object.assign({}, comment(acc), comment(c)))
+                    }
+                }    
             }
+
+            return state
         default:
             return state
     }

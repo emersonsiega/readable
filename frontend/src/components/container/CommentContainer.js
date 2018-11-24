@@ -1,10 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import Comment from '../presentational/Comment'
+
 const CommentContainer = ({comment}) => (
-    <div style={{border: 'solid 1px'}}>
-        <h4>{comment.body}</h4>
-    </div>
+    <Comment 
+        id={comment.id}
+        parentId={comment.parentId}
+        body={comment.body}
+        timestamp={comment.timestamp}
+        author={comment.author}
+        voteScore={comment.voteScore}
+    />
 )
 
 const mapStateToProps = ({ comments = {} }, { id, parentId }) => ({
