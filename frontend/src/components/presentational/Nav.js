@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { FaMoon, FaRegMoon } from 'react-icons/fa'
+import { FaSun, FaMoon } from 'react-icons/fa'
 
 import { IconZoom, Link } from '../presentational/Components'
 import { navType, THEME_LIGHT } from '../../types'
@@ -41,6 +41,7 @@ const ThemeToggler = styled.div`
 
 const Nav = (props) => {
     const handleThemeToggle = () => {
+        console.log(props.theme)
         props.toggleTheme()
     }
 
@@ -52,8 +53,8 @@ const Nav = (props) => {
             <ThemeToggler>
                 <IconZoom onClick={handleThemeToggle}>
                     {props.theme === THEME_LIGHT 
-                        ? <FaRegMoon />
-                        : <FaMoon />
+                        ? <FaMoon />
+                        : <FaSun />
                     }
                 </IconZoom> 
             </ThemeToggler>

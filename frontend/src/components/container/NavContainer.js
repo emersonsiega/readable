@@ -8,6 +8,8 @@ const mapDispatchToProps = ({
     toggleTheme: handleToggleTheme
 })
 
-const mapStateToProps = () => ({})
+const mapStateToProps = ({theme}) => ({
+    theme: theme
+})
 
 export default connect( mapStateToProps, mapDispatchToProps )(withTheme(Nav))
