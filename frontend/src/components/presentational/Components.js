@@ -1,18 +1,19 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import transition from "styled-transition-group"
 import { Link as RouterLink } from 'react-router-dom'
 
 const Button = styled.button`
     background: ${props => props.theme.link};
     color: ${props => props.theme.linkColor};
-    border: solid 1px transparent;
+    box-shadow: 0px 0px 3px ${props => props.theme.link};
+    border: none;
     border-radius: 5px;
     padding: 10px;
     cursor: pointer;
     outline: none;
 
-    &:hover {
-        box-shadow: 0px 0px 10px 0px ${props => props.theme.link}
+    &:hover, :focus {
+        box-shadow: 0px 0px 10px ${props => props.theme.link}
     }
 `
 
@@ -112,6 +113,31 @@ const PostActions = styled.div`
     margin-right: auto;
 `
 
+const inputStyle = css`
+    border: none;
+    box-shadow: 0px 0px 3px ${props => props.hasError ? props.theme.error : props.theme.hover};
+    color: ${props => props.theme.color};
+    padding: 10px;
+    background: transparent;
+    border-radius: 5px;
+    outline: none;
+
+    &:focus, :hover {
+        box-shadow: 0px 0px 10px ${props => props.hasError ? props.theme.error : props.theme.hover};
+    }
+`
+
+const Input = styled.input`${inputStyle}`
+
+const InputArea = styled.textarea`
+    ${inputStyle}
+    min-height: 3.5em;
+`
+
+const ErrorLabel = styled.label`
+    color: ${props => props.theme.error};
+`
+
 export {
     Button,
     Icon,
@@ -125,4 +151,7 @@ export {
     PostDetail,
     PostBody,
     PostActions,
+    Input,
+    InputArea,
+    ErrorLabel,
 }

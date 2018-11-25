@@ -1,4 +1,8 @@
-import { FETCH_COMMENTS_BY_POST } from '../actions/comments'
+import { 
+    FETCH_COMMENTS_BY_POST,
+    ADD_COMMENT,
+    DELETE_COMMENT,
+} from '../actions/comments'
 
 const comment = (comment = {}) => ({
     [comment.id]: {
@@ -18,6 +22,18 @@ const comments = (state = {}, action = { comments: [] }) => {
                 }    
             }
 
+            return state
+        case ADD_COMMENT:
+            return {
+                ...state,
+                [action.coomment.parentId]: {
+                    ...state[action.comment.parentId],
+                    [action.comment.id]: {
+                        ...action.comment
+                    }
+                }
+            }
+        case DELETE_COMMENT:
             return state
         default:
             return state

@@ -13,6 +13,7 @@ const themes = {
         link: '#6fcf97',
         linkColor: '#333',
         hover: '#6faacf',
+        error: '#f97373',
     },
     light: {
         background: '#f2f2f2',
@@ -21,6 +22,7 @@ const themes = {
         link: '#6fcf97',
         linkColor: '#333',
         hover: '#6faacf',
+        error: '#f97373',
     }
 }
 

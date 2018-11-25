@@ -3,18 +3,24 @@ import styled from 'styled-components'
 
 import PostContainer from '../container/PostContainer'
 import CommentsList from '../container/CommentsList'
+import NewCommentContainer from '../container/NewCommentContainer'
 
 const PostPageArticle = styled.article``
 
-const CommentsCount = styled.h3``
+const Reply = styled.div`
+    font-size: 1.1em;
+    margin-top: 10px;
+`
 
 const PostPage = (props) => (
     <PostPageArticle>
         <PostContainer />
-        <CommentsCount>{props.commentsCount} replies</CommentsCount>
-        <CommentsList 
-            parentId={props.postId} 
-        />
+
+        <Reply>Reply</Reply>
+        <NewCommentContainer parentId={props.postId} />
+
+        <Reply>{props.commentsCount} replies</Reply>
+        <CommentsList parentId={props.postId} />
     </PostPageArticle>
 )
 
