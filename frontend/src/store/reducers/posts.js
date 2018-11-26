@@ -1,4 +1,7 @@
-import { FETCH_POSTS } from '../actions/posts'
+import { 
+    FETCH_POSTS,
+    INCREASE_COMMENT_COUNTER,
+} from '../actions/posts'
 
 const post = (post = {}) => ({
     [post.id] : {
@@ -12,6 +15,14 @@ const posts = (state = {}, action) => {
             return {
                 ...state,
                 ...action.posts.reduce((acc, p) => Object.assign({}, post(acc), post(p)))
+            }
+        case INCREASE_COMMENT_COUNTER:
+            return {
+                ...state,
+                [action.id]: {
+                    ...state[action.id],
+                    commentCount: state[action.id].commentCount + 1
+                }
             }
         default:
             return state

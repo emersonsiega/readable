@@ -18,7 +18,8 @@
     "styled-components": "^4.0.3",
     "styled-transition-group": "^1.0.0",
     "typeface-playball": "^0.0.54",
-    "typeface-roboto": "^0.0.54"
+    "typeface-roboto": "^0.0.54",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "start": "react-scripts start",

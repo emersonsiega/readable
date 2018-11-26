@@ -15,11 +15,6 @@ const FooterDiv = styled.div`
     margin-top: 10px;
 `
 
-const InputBigger = styled(Input)`
-    flex-grow: 2;
-    margin-right: 20px;
-`
-
 const ButtonDiv = styled.div`
     display: flex;
     flex-grow: 1;
@@ -31,16 +26,24 @@ const InputContainer = styled.div`
     flex-direction: column;
 `
 
+const InputContainerBigger = styled(InputContainer)`
+    flex-grow: 2;
+    margin-right: 20px;
+`
+
+const INITIAL_STATE = {
+    fields: {
+        body: '',
+        author: '',
+    },
+    error: {}
+}
+
 class NewComment extends Component {
-    state = {
-        fields: {
-        },
-        error: {}
-    }
+    state = INITIAL_STATE
 
     onChangeField = (e) => {
         const {id, value} = e.target
-        console.log(id)
 
         this.setState((state) => ({
             fields: {
@@ -72,8 +75,11 @@ class NewComment extends Component {
         }
 
         this.props.onSubmit({
-            ...this.state.fields
+            ...this.state.fields,
+            parentId: this.props.parentId
         })
+
+        this.setState(INITIAL_STATE)
     }
 
     render() {
@@ -85,7 +91,7 @@ class NewComment extends Component {
                         id='body'
                         placeholder='What are your thoughts?'
                         hasError={this.state.error.body}
-                        value={this.state.body}
+                        value={this.state.fields.body}
                         onChange={this.onChangeField}
                     />
                     {this.state.error.body && (
@@ -93,20 +99,20 @@ class NewComment extends Component {
                     )}
                 </InputContainer>
                 <FooterDiv>
-                    <InputContainer>
-                        <InputBigger
+                    <InputContainerBigger>
+                        <Input
                             tabIndex={2}
                             id='author'
                             type='text'
                             placeholder='Author'
                             hasError={this.state.error.author}
-                            value={this.state.author}
+                            value={this.state.fields.author}
                             onChange={this.onChangeField}
                         />
                         {this.state.error.author && (
                             <ErrorLabel>Minimum size is 2 characters</ErrorLabel>
                         )}
-                    </InputContainer>
+                    </InputContainerBigger>
                     <ButtonDiv>
                         <Button 
                             tabIndex={3}

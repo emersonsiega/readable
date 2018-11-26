@@ -26,7 +26,7 @@ const comments = (state = {}, action = { comments: [] }) => {
         case ADD_COMMENT:
             return {
                 ...state,
-                [action.coomment.parentId]: {
+                [action.comment.parentId]: {
                     ...state[action.comment.parentId],
                     [action.comment.id]: {
                         ...action.comment
@@ -34,7 +34,11 @@ const comments = (state = {}, action = { comments: [] }) => {
                 }
             }
         case DELETE_COMMENT:
-            return state
+            delete state[action.parentId][action.id]
+            
+            return {
+                ...state
+            }
         default:
             return state
     }

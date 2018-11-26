@@ -11,6 +11,7 @@ const Button = styled.button`
     padding: 10px;
     cursor: pointer;
     outline: none;
+    max-height: 35px;
 
     &:hover, :focus {
         box-shadow: 0px 0px 10px ${props => props.theme.link}

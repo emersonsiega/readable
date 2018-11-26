@@ -19,7 +19,6 @@ class CommentsAPI {
 
         return request
             .then(response => response.data)
-            .catch(err => err.response)
     }
 
     static voteComment(id, vote) {
@@ -27,7 +26,6 @@ class CommentsAPI {
 
         return request
             .then(response => response.data)
-            .catch(err => err.response)
     }
 
     static editComment(commentId, timestamp, body) {
@@ -35,7 +33,6 @@ class CommentsAPI {
 
         return request
             .then(response => response.data)
-            .catch(err => err.response)
     }
 
     static deleteComment(commentId) {
@@ -43,7 +40,6 @@ class CommentsAPI {
 
         return request
             .then(response => response.data)
-            .catch(err => err.response)
     }
 
 }
