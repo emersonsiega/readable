@@ -33,7 +33,7 @@ const IconZoomMedium = styled(IconZoom)`
     font-size: 1.5em;
 `
 
-const Comment = ({voteScore, body, author, timestamp, onDelete, onVoteDown, onVoteUp}) => (
+const Comment = ({voteScore, body, author, timestamp, onDelete, onEdit, onVoteDown, onVoteUp}) => (
     <CommentContainer>
         <CommentHeader>
             <Vote 
@@ -46,7 +46,7 @@ const Comment = ({voteScore, body, author, timestamp, onDelete, onVoteDown, onVo
         </CommentHeader>
         <PostFooter>
             <PostActions>
-                <IconZoomMedium><FaRegEdit onClick={() => alert('edit')}/></IconZoomMedium>
+                <IconZoomMedium><FaRegEdit onClick={onEdit}/></IconZoomMedium>
                 <IconZoomMedium><FaTrashAlt onClick={onDelete}/></IconZoomMedium>
             </PostActions>
             <PostFooterRight>

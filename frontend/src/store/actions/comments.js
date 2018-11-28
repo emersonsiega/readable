@@ -10,6 +10,8 @@ import {
 const FETCH_COMMENTS_BY_POST = 'FETCH_COMMENTS_BY_POST'
 const ADD_COMMENT = 'ADD_COMMENT'
 const DELETE_COMMENT = 'DELETE_COMMENT'
+const EDIT_COMMENT = 'EDIT_COMMENT'
+const TOGGLE_EDITING = 'TOGGLE_EDITING'
 
 const fetchComments = (comments, post_id) => ({
     type: FETCH_COMMENTS_BY_POST,
@@ -65,6 +67,26 @@ const handleDeleteComment = (id, parentId) => dispatch => {
         .catch( err => console.warn('Failed to delete comment', err) )
 }
 
+const editComment = (id, timestamp, body) => ({
+    type: EDIT_COMMENT,
+    id,
+    timestamp,
+    body,
+})
+
+const handleEditComment = (id, body) => dispatch => {
+    const timestamp = new Date().getTime()
+    CommentsAPI.editComment(id, timestamp, body)
+        .then( _ => dispatch(editComment(id, timestamp, body)))
+        .catch( err => console.log('Failed to edit comment', err))
+}
+
+const toggleEditing = (id, parentId) => ({
+    type: TOGGLE_EDITING,
+    id,
+    parentId,
+})
+
 export {
     FETCH_COMMENTS_BY_POST,
     handleFetchComments,
@@ -72,4 +94,8 @@ export {
     handleAddComment,
     DELETE_COMMENT,
     handleDeleteComment,
+    EDIT_COMMENT,
+    handleEditComment,
+    TOGGLE_EDITING,
+    toggleEditing,
 }

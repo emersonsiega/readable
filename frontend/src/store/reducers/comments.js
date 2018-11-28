@@ -2,6 +2,8 @@ import {
     FETCH_COMMENTS_BY_POST,
     ADD_COMMENT,
     DELETE_COMMENT,
+    EDIT_COMMENT,
+    TOGGLE_EDITING,
 } from '../actions/comments'
 
 const comment = (comment = {}) => ({
@@ -41,6 +43,27 @@ const comments = (state = {}, action = { comments: [] }) => {
                     [action.id]: {
                         ...state[action.parentId][action.id],
                         deleted: true
+                    }
+                }
+            }
+        case EDIT_COMMENT:
+            return {
+                ...state,
+                [action.id]: {
+                    ...state[action.id],
+                    body: action.body,
+                    timestamp: action.timestamp,
+                    isBeingEdited: undefined
+                }
+            }
+        case TOGGLE_EDITING:
+            return {
+                ...state,
+                [action.parentId]: {
+                    ...state[action.parentId],
+                    [action.id]: {
+                        ...state[action.parentId][action.id],
+                        isBeingEdited: state[action.parentId][action.id].isBeingEdited !== true
                     }
                 }
             }

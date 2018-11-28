@@ -31,16 +31,29 @@ const InputContainerBigger = styled(InputContainer)`
     margin-right: 20px;
 `
 
-const INITIAL_STATE = {
+const initialState = (body = '', author = '') => ({
     fields: {
-        body: '',
-        author: '',
+        body: body,
+        author: author,
     },
-    error: {}
-}
+    error: {},
+    isBeingEdited: body !== '' && author !== ''
+})
 
 class NewComment extends Component {
-    state = INITIAL_STATE
+    constructor(props){
+        super(props)
+
+        const { comment } = props
+
+        console.log('constructor', comment)
+
+        if ( comment === null ) {
+            this.state = initialState()
+        } else {
+            this.state = initialState(comment.body, comment.author)
+        }
+    }
 
     onChangeField = (e) => {
         const {id, value} = e.target
@@ -79,7 +92,7 @@ class NewComment extends Component {
             parentId: this.props.postId
         })
 
-        this.setState(INITIAL_STATE)
+        this.setState(initialState())
     }
 
     render() {
@@ -104,6 +117,7 @@ class NewComment extends Component {
                             tabIndex={2}
                             id='author'
                             type='text'
+                            disabled={this.state.isBeingEdited === true}
                             placeholder='Author'
                             hasError={this.state.error.author}
                             value={this.state.fields.author}

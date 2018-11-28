@@ -30,6 +30,7 @@ const commentType = {
     deleted: bool,
     parentDeleted: bool,
     onDelete: func.isRequired,
+    onEdit: func.isRequired,
 }
 
 const VOTED_UP = 'up'
