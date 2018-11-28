@@ -9,7 +9,7 @@ const PostsList = ({posts = []}) => (
     <TransitionGroup>
         {posts.map( (post, i) => post.deleted === false && (
             <Fade key={post.id} timeout={500 + i * 1000} time={500 + i*1000}>
-                <PostContainer id={post.id} />
+                <PostContainer postId={post.id} />
             </Fade>
         ) )}
     </TransitionGroup>

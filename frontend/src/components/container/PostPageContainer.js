@@ -7,30 +7,27 @@ import PostPage from '../presentational/PostPage'
 
 class PostPageContainer extends Component {
     componentDidMount() {
-        const { dispatch, postId } = this.props
-
-        dispatch(handleFetchComments(postId))
+        const { fetchComments, postId } = this.props
+        fetchComments( postId )
     }
 
-    render() {
-        const { postId, commentsCount } = this.props
-
-        return (
-            <PostPage 
-                postId={postId}
-                commentsCount={commentsCount}
-            />
-        )
+    render = () => {
+        return this.props.post.id !== undefined 
+            ?   <PostPage
+                    postId={this.props.post.id}
+                    commentCount={this.props.post.commentCount}
+                />
+            :   null
     }
 }
 
-const mapStateToProps = ({comments = {}}, {match}) => {
-    const commentsList = comments[match.params.post_id] || {}
+const mapStateToProps = ({posts}, {match}) => ({
+    post: posts[match.params.post_id] || {},
+    postId: match.params.post_id
+})
 
-    return {
-        postId: match.params.post_id,
-        commentsCount: Object.keys( commentsList ).length
-    }
-}
+const mapDispatchToProps = dispatch => ({
+    fetchComments: (postId) => dispatch(handleFetchComments(postId))
+})
 
-export default withRouter(connect(mapStateToProps)(PostPageContainer))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PostPageContainer))

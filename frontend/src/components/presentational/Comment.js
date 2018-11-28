@@ -13,7 +13,7 @@ import {
     PostActions,
     IconZoom,
 } from './Components'
-import { commentType } from '../../types'
+import { commentType, voteType } from '../../types'
 import Vote from './Vote'
 
 const CommentContainer = styled(PostContainer)`
@@ -33,27 +33,30 @@ const IconZoomMedium = styled(IconZoom)`
     font-size: 1.5em;
 `
 
-const Comment = ({voteScore, body, author, timestamp}) => (
+const Comment = ({voteScore, body, author, timestamp, onDelete, onVoteDown, onVoteUp}) => (
     <CommentContainer>
         <CommentHeader>
             <Vote 
                 voteScore={voteScore}
-            />
+                onVoteUp={onVoteUp}
+                onVoteDown={onVoteDown}
+                voted={''}
+        />
             <CommentBody>{body}</CommentBody>
         </CommentHeader>
         <PostFooter>
             <PostActions>
                 <IconZoomMedium><FaRegEdit onClick={() => alert('edit')}/></IconZoomMedium>
-                <IconZoomMedium><FaTrashAlt onClick={() => alert('delete')}/></IconZoomMedium>
+                <IconZoomMedium><FaTrashAlt onClick={onDelete}/></IconZoomMedium>
             </PostActions>
             <PostFooterRight>
-                    <PostDetail>{author}</PostDetail>
-                    <PostDetail>{dateTimeFormatter(timestamp)}</PostDetail>
-                </PostFooterRight>
+                <PostDetail>{author}</PostDetail>
+                <PostDetail>{dateTimeFormatter(timestamp)}</PostDetail>
+            </PostFooterRight>
         </PostFooter>
     </CommentContainer>
 )
 
-Comment.propTypes = { ...commentType }
+Comment.propTypes = { ...commentType, ...voteType }
 
 export default Comment

@@ -14,13 +14,13 @@ const Reply = styled.div`
 
 const PostPage = (props) => (
     <PostPageArticle>
-        <PostContainer />
+        <PostContainer postId={props.postId} />
 
         <Reply>Reply</Reply>
-        <NewCommentContainer parentId={props.postId} />
+        <NewCommentContainer postId={props.postId} />
 
-        <Reply>{props.commentsCount} replies</Reply>
-        <CommentsList parentId={props.postId} />
+        <Reply>{props.commentCount} replies</Reply>
+        <CommentsList postId={props.postId} />
     </PostPageArticle>
 )
 

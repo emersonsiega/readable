@@ -19,7 +19,7 @@ const comments = (state = {}, action = { comments: [] }) => {
                     [action.post_id]: {
                         ...action.comments.reduce((acc, c) => Object.assign({}, comment(acc), comment(c)))
                     }
-                }    
+                }
             }
 
             return state
@@ -34,10 +34,15 @@ const comments = (state = {}, action = { comments: [] }) => {
                 }
             }
         case DELETE_COMMENT:
-            delete state[action.parentId][action.id]
-            
             return {
-                ...state
+                ...state,
+                [action.parentId]: {
+                    ...state[action.parentId],
+                    [action.id]: {
+                        ...state[action.parentId][action.id],
+                        deleted: true
+                    }
+                }
             }
         default:
             return state

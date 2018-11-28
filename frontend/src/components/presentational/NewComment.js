@@ -76,7 +76,7 @@ class NewComment extends Component {
 
         this.props.onSubmit({
             ...this.state.fields,
-            parentId: this.props.parentId
+            parentId: this.props.postId
         })
 
         this.setState(INITIAL_STATE)

@@ -2,7 +2,10 @@ import v4 from 'uuid/v4'
 
 import PostsAPI from '../../api/PostsAPI'
 import CommentsAPI from '../../api/CommentsAPI'
-import { increaseCommentCounter } from './posts'
+import { 
+    increaseCommentCounter,
+    decreaseCommentCounter,
+} from './posts'
 
 const FETCH_COMMENTS_BY_POST = 'FETCH_COMMENTS_BY_POST'
 const ADD_COMMENT = 'ADD_COMMENT'
@@ -16,7 +19,7 @@ const fetchComments = (comments, post_id) => ({
 
 const handleFetchComments = post_id => dispatch => {
     PostsAPI.comments(post_id)
-        .then( data => dispatch(fetchComments(data, post_id)) )
+        .then(data => dispatch(fetchComments(data, post_id)))
         .catch(err => console.log(`Failed to load comments ${JSON.stringify(err)}`))
 }
 
@@ -28,6 +31,7 @@ const addComment = (comment) => ({
 const formatComment = (comment) => ({
     id: v4(),
     timestamp: new Date().getTime(),
+    deleted: false,
     ...comment,
 })
 
@@ -42,17 +46,24 @@ const handleAddComment = comment => dispatch => {
         })
         .catch( err => {
             console.warn('Failed to save comment', err)
-            dispatch(deleteComment(newComment.parentId, newComment.id))
+            dispatch(deleteComment(newComment.id, newComment.parentId))
         })
 }
 
-const deleteComment = (parentId, id) => ({
+const deleteComment = (id, parentId) => ({
     type: DELETE_COMMENT,
-    parentId,
     id,
+    parentId,
 })
 
-//TODO: handleDeleteComment 
+const handleDeleteComment = (id, parentId) => dispatch => {
+    CommentsAPI.deleteComment( id )
+        .then( _ => {
+            dispatch(deleteComment(id, parentId))
+            dispatch(decreaseCommentCounter(parentId))
+        } )
+        .catch( err => console.warn('Failed to delete comment', err) )
+}
 
 export {
     FETCH_COMMENTS_BY_POST,
@@ -60,5 +71,5 @@ export {
     ADD_COMMENT,
     handleAddComment,
     DELETE_COMMENT,
-
+    handleDeleteComment,
 }

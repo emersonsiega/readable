@@ -9,7 +9,7 @@ const handleFetchData = () => dispatch => {
         dispatch(handleFetchPosts()),
         dispatch(handleFetchTheme()),
         dispatch(setLoggedUser(LOGGED_USER))
-    ]).catch( (err) => console.log(`Failed to fetch data from server ${err}`) )
+    ]).catch( (err) => console.log('Failed to fetch data from server', err) )
 }
 
 export {

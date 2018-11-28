@@ -13,7 +13,7 @@ const NewCommentContainer = (props) => {
 
     return (
         <NewComment 
-            parentId={props.parentId} 
+            postId={props.postId} 
             onSubmit={postComment}
         />
     )

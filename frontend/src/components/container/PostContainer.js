@@ -42,10 +42,8 @@ const PostContainer = ({post = {}}) => (
     />
 )
 
-const mapStateToProps = ({ posts }, {id, match}) => ({
-    post: {
-        ...posts[match.params.post_id || id]
-    },
+const mapStateToProps = ({posts}, {postId}) => ({
+    post: posts[postId]
 })
 
 export default withRouter(connect(mapStateToProps)(PostContainer))

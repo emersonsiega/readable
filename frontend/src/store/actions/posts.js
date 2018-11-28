@@ -2,6 +2,7 @@ import PostsAPI from '../../api/PostsAPI'
 
 const FETCH_POSTS = 'FETCH_POSTS'
 const INCREASE_COMMENT_COUNTER = 'INCREASE_COMMENT_COUNTER'
+const DECREASE_COMMENT_COUNTER = 'DECREASE_COMMENT_COUNTER'
 
 const fetchPosts = posts => ({
     type: FETCH_POSTS,
@@ -19,9 +20,16 @@ const increaseCommentCounter = id => ({
     id,
 })
 
+const decreaseCommentCounter = id => ({
+    type: DECREASE_COMMENT_COUNTER,
+    id,
+})
+
 export {
     FETCH_POSTS,
     handleFetchPosts,
     INCREASE_COMMENT_COUNTER,
     increaseCommentCounter,
+    DECREASE_COMMENT_COUNTER,
+    decreaseCommentCounter,
 }

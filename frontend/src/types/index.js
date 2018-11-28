@@ -29,6 +29,7 @@ const commentType = {
     voteScore: number,
     deleted: bool,
     parentDeleted: bool,
+    onDelete: func.isRequired,
 }
 
 const VOTED_UP = 'up'

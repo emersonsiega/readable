@@ -1,6 +1,7 @@
 import { 
     FETCH_POSTS,
     INCREASE_COMMENT_COUNTER,
+    DECREASE_COMMENT_COUNTER,
 } from '../actions/posts'
 
 const post = (post = {}) => ({
@@ -22,6 +23,14 @@ const posts = (state = {}, action) => {
                 [action.id]: {
                     ...state[action.id],
                     commentCount: state[action.id].commentCount + 1
+                }
+            }
+        case DECREASE_COMMENT_COUNTER:
+            return {
+                ...state,
+                [action.id]: {
+                    ...state[action.id],
+                    commentCount: state[action.id].commentCount - 1
                 }
             }
         default:
