@@ -2,12 +2,20 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import Comment from '../presentational/Comment'
-import { handleDeleteComment } from '../../store/actions/comments'
+import { 
+    handleDeleteComment,
+    toggleEditing,
+} from '../../store/actions/comments'
 
-const CommentContainer = ({comment, dispatch}) => {
-    const onDelete = e => {
+const CommentContainer = ({comment, onDelete, onEdit}) => {
+    const onDeleteClick = e => {
         e.preventDefault()
-        dispatch(handleDeleteComment(comment.id, comment.parentId))
+        onDelete(comment)
+    }
+
+    const onEditClick = e => {
+        e.preventDefault()
+        onEdit(comment)
     }
 
     const onVoteUp = e => {
@@ -28,11 +36,19 @@ const CommentContainer = ({comment, dispatch}) => {
             timestamp={comment.timestamp}
             author={comment.author}
             voteScore={comment.voteScore}
-            onDelete={onDelete}
+            onDelete={onDeleteClick}
+            onEdit={onEditClick}
             onVoteUp={onVoteUp}
             onVoteDown={onVoteDown}
         />
     )
 }
 
-export default connect()(CommentContainer)
+const mapStateToProps = props => props
+
+const mapDispatchToProps = dispatch => ({
+    onDelete: (comment) => dispatch(handleDeleteComment(comment.id, comment.parentId)),
+    onEdit: (comment) => dispatch(toggleEditing(comment.id, comment.parentId))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(CommentContainer)
