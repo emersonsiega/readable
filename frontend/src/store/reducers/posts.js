@@ -2,6 +2,7 @@ import {
     FETCH_POSTS,
     INCREASE_COMMENT_COUNTER,
     DECREASE_COMMENT_COUNTER,
+    DELETE_POST,
 } from '../actions/posts'
 
 const post = (post = {}) => ({
@@ -31,6 +32,14 @@ const posts = (state = {}, action) => {
                 [action.id]: {
                     ...state[action.id],
                     commentCount: state[action.id].commentCount - 1
+                }
+            }
+        case DELETE_POST:
+            return {
+                ...state,
+                [action.id] : {
+                    ...state[action.id],
+                    deleted: true
                 }
             }
         default:
