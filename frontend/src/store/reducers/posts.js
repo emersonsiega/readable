@@ -5,18 +5,14 @@ import {
     DELETE_POST,
 } from '../actions/posts'
 
-const post = (post = {}) => ({
-    [post.id] : {
-        ...post
-    }
-})
+import { fromArray } from '../../utils/ObjectFormat'
 
 const posts = (state = {}, action) => {
     switch (action.type) {
         case FETCH_POSTS:
             return {
                 ...state,
-                ...action.posts.reduce((acc, p) => Object.assign({}, post(acc), post(p)))
+                ...fromArray( action.posts )
             }
         case INCREASE_COMMENT_COUNTER:
             return {

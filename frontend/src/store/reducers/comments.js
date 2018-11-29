@@ -6,9 +6,12 @@ import {
     TOGGLE_EDITING,
 } from '../actions/comments'
 
-const comment = (comment = {}) => ({
-    [comment.id]: {
-        ...comment
+import { fromArray } from '../../utils/ObjectFormat'
+
+const toggleEditing = (state, id, parentId) => ({
+    [id]: {
+        ...state[parentId][id],
+        isBeingEdited: !state[parentId][id].isBeingEdited
     }
 })
 
@@ -19,7 +22,7 @@ const comments = (state = {}, action = { comments: [] }) => {
                 return {
                     ...state,
                     [action.post_id]: {
-                        ...action.comments.reduce((acc, c) => Object.assign({}, comment(acc), comment(c)))
+                        ...fromArray( action.comments )
                     }
                 }
             }
@@ -57,14 +60,22 @@ const comments = (state = {}, action = { comments: [] }) => {
                 }
             }
         case TOGGLE_EDITING:
+            let newState
+            const isBeingEdited = Object.keys(state[action.parentId]).find( 
+                k => k !== action.id && state[action.parentId][k].isBeingEdited === true )
+
+            if ( isBeingEdited !== undefined ) {
+                // Toggle the isBeingEdited property from other comment
+                // Keep just one comment in "edition mode" per time
+                newState = toggleEditing( state, isBeingEdited, action.parentId )
+            }
+
             return {
                 ...state,
                 [action.parentId]: {
                     ...state[action.parentId],
-                    [action.id]: {
-                        ...state[action.parentId][action.id],
-                        isBeingEdited: state[action.parentId][action.id].isBeingEdited !== true
-                    }
+                    ...newState,
+                    ...toggleEditing( state, action.id, action.parentId )
                 }
             }
         default:
