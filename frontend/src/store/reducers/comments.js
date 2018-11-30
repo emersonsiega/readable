@@ -4,9 +4,11 @@ import {
     DELETE_COMMENT,
     EDIT_COMMENT,
     TOGGLE_EDITING,
+    VOTE_COMMENT,
 } from '../actions/comments'
 
 import { fromArray } from '../../utils/ObjectFormat'
+import { VOTED_UP } from '../../types'
 
 const toggleEditing = (state, id, parentId) => ({
     [id]: {
@@ -78,6 +80,19 @@ const comments = (state = {}, action = { comments: [] }) => {
                     ...state[action.parentId],
                     ...newState,
                     ...toggleEditing( state, action.id, action.parentId )
+                }
+            }
+        case VOTE_COMMENT:
+            return {
+                ...state,
+                [action.parentId]: {
+                    ...state[action.parentId],
+                    [action.id]: {
+                        ...state[action.parentId][action.id],
+                        voteScore: action.vote === VOTED_UP 
+                            ? state[action.parentId][action.id].voteScore + 1
+                            : state[action.parentId][action.id].voteScore - 1
+                    }
                 }
             }
         default:

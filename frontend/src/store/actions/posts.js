@@ -59,13 +59,14 @@ const handleVotePost = (id, vote) => dispatch => {
 
 export {
     FETCH_POSTS,
-    handleFetchPosts,
     INCREASE_COMMENT_COUNTER,
-    increaseCommentCounter,
     DECREASE_COMMENT_COUNTER,
-    decreaseCommentCounter,
     DELETE_POST,
-    handleDeletePost,
     VOTE_POST,
+    
+    handleFetchPosts,
+    increaseCommentCounter,
+    decreaseCommentCounter,
+    handleDeletePost,
     handleVotePost,
 }

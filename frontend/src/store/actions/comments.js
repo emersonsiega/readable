@@ -6,12 +6,17 @@ import {
     increaseCommentCounter,
     decreaseCommentCounter,
 } from './posts'
+import {
+    VOTED_DOWN,
+    VOTED_UP,
+} from '../../types'
 
 const FETCH_COMMENTS_BY_POST = 'FETCH_COMMENTS_BY_POST'
 const ADD_COMMENT = 'ADD_COMMENT'
 const DELETE_COMMENT = 'DELETE_COMMENT'
 const EDIT_COMMENT = 'EDIT_COMMENT'
 const TOGGLE_EDITING = 'TOGGLE_EDITING'
+const VOTE_COMMENT = 'VOTE_COMMENT'
 
 const fetchComments = (comments, post_id) => ({
     type: FETCH_COMMENTS_BY_POST,
@@ -34,6 +39,7 @@ const formatComment = (comment) => ({
     id: v4(),
     timestamp: new Date().getTime(),
     deleted: false,
+    voteScore: 0,
     ...comment,
 })
 
@@ -86,15 +92,35 @@ const toggleEditing = (id, parentId) => ({
     parentId,
 })
 
+const voteComment = (parentId, id, vote) => ({
+    type: VOTE_COMMENT,
+    parentId,
+    id,
+    vote,
+})
+
+const handleVoteComment = (parentId, id, vote) => dispatch => {
+    dispatch(voteComment(parentId, id, vote))
+
+    CommentsAPI.voteComment(id, vote)
+        .catch( err => {
+            console.log(`Failed to ${vote} comment`, err)
+            dispatch(voteComment(parentId, id, vote === VOTED_UP ? VOTED_DOWN : VOTED_UP))
+        })
+}
+
 export {
     FETCH_COMMENTS_BY_POST,
-    handleFetchComments,
     ADD_COMMENT,
-    handleAddComment,
     DELETE_COMMENT,
-    handleDeleteComment,
     EDIT_COMMENT,
-    handleEditComment,
     TOGGLE_EDITING,
+    VOTE_COMMENT,
+
+    handleFetchComments,
+    handleAddComment,
+    handleDeleteComment,
+    handleEditComment,
     toggleEditing,
+    handleVoteComment,
 }
