@@ -52,11 +52,13 @@ const comments = (state = {}, action = { comments: [] }) => {
         case EDIT_COMMENT:
             return {
                 ...state,
-                [action.id]: {
-                    ...state[action.id],
-                    body: action.body,
-                    timestamp: action.timestamp,
-                    isBeingEdited: undefined
+                [action.parentId]: {
+                    ...state[action.parentId],
+                    [action.id]: {
+                        ...state[action.parentId][action.id],
+                        body: action.body,
+                        isBeingEdited: false
+                    }
                 }
             }
         case TOGGLE_EDITING:

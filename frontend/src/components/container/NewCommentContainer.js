@@ -10,16 +10,12 @@ import {
 const NewCommentContainer = (props) => {
     
     const postComment = ({ body, author }) => {
-        const { comment, editComment, addComment } = props
-
-        console.log('comment being edited', comment)
+        const { comment, postId, editComment, addComment } = props
 
         if ( comment !== null && comment.isBeingEdited === true ) {
-            console.log('editing', comment, body)
-            editComment(comment.id, body)
+            editComment(comment, body)
         } else {
-            console.log('posting', body, author)
-            addComment(body, author)
+            addComment(postId, body, author)
         }
     }
 
@@ -32,19 +28,13 @@ const NewCommentContainer = (props) => {
     )
 }
 
-const mapStateToProps = ({comments}, {postId}) => {
-    const comment = Object.values(comments[postId] || {}).find(c => c.isBeingEdited === true) || null
-
-    console.log('comment', comment)
-
-    return {
-        comment: comment
-    }
-}
+const mapStateToProps = ({comments}, {postId}) => ({
+    comment: Object.values(comments[postId] || {}).find(c => c.isBeingEdited === true) || null
+})
 
 const mapDispatchToProps = dispatch => ({
-    editComment: (id, body) => dispatch(handleEditComment(id, body)),
-    addComment: (body, author) => dispatch(handleAddComment({ body, author }))
+    editComment: ({ parentId, id, timestamp }, body) => dispatch(handleEditComment(parentId, id, body, timestamp)),
+    addComment: (parentId, body, author) => dispatch(handleAddComment({ parentId, body, author }))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewCommentContainer)

@@ -67,17 +67,16 @@ const handleDeleteComment = (id, parentId) => dispatch => {
         .catch( err => console.warn('Failed to delete comment', err) )
 }
 
-const editComment = (id, timestamp, body) => ({
+const editComment = (parentId, id, body) => ({
     type: EDIT_COMMENT,
-    id,
-    timestamp,
-    body,
+    parentId, 
+    id, 
+    body
 })
 
-const handleEditComment = (id, body) => dispatch => {
-    const timestamp = new Date().getTime()
+const handleEditComment = (parentId, id, body, timestamp) => dispatch => {
     CommentsAPI.editComment(id, timestamp, body)
-        .then( _ => dispatch(editComment(id, timestamp, body)))
+        .then( _ => dispatch(editComment(parentId, id, body)))
         .catch( err => console.log('Failed to edit comment', err))
 }
 

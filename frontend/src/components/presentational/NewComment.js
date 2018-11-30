@@ -31,28 +31,19 @@ const InputContainerBigger = styled(InputContainer)`
     margin-right: 20px;
 `
 
-const initialState = (body = '', author = '') => ({
+const initialState = () => ({
     fields: {
-        body: body,
-        author: author,
+        body: '',
+        author: '',
     },
-    error: {},
-    isBeingEdited: body !== '' && author !== ''
+    error: {}
 })
 
 class NewComment extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
 
-        const { comment } = props
-
-        console.log('constructor', comment)
-
-        if ( comment === null ) {
-            this.state = initialState()
-        } else {
-            this.state = initialState(comment.body, comment.author)
-        }
+        this.state = initialState()
     }
 
     onChangeField = (e) => {
@@ -95,7 +86,24 @@ class NewComment extends Component {
         this.setState(initialState())
     }
 
+    componentDidUpdate( prevProps ) {
+        const { comment } = this.props
+        if ( comment !== prevProps.comment ) {
+            this.setState({
+                fields: {
+                    body: comment ? comment.body : '',
+                    author: comment ? comment.author : ''
+                }
+            })
+        }
+    }
+
     render() {
+        const { body, author } = this.state.fields
+        const { error } = this.state
+        const { comment } = this.props
+        const isBeingEdited = comment !== null && comment.isBeingEdited === true
+
         return (
             <PostContainer>
                 <InputContainer>
@@ -103,11 +111,11 @@ class NewComment extends Component {
                         tabIndex={1}
                         id='body'
                         placeholder='What are your thoughts?'
-                        hasError={this.state.error.body}
-                        value={this.state.fields.body}
+                        hasError={error.body}
+                        value={body}
                         onChange={this.onChangeField}
                     />
-                    {this.state.error.body && (
+                    {error.body === true && (
                         <ErrorLabel>Minimum size is 10 characters</ErrorLabel>
                     )}
                 </InputContainer>
@@ -117,13 +125,13 @@ class NewComment extends Component {
                             tabIndex={2}
                             id='author'
                             type='text'
-                            disabled={this.state.isBeingEdited === true}
+                            disabled={isBeingEdited}
                             placeholder='Author'
-                            hasError={this.state.error.author}
-                            value={this.state.fields.author}
+                            hasError={error.author}
+                            value={author}
                             onChange={this.onChangeField}
                         />
-                        {this.state.error.author && (
+                        {error.author === true && (
                             <ErrorLabel>Minimum size is 2 characters</ErrorLabel>
                         )}
                     </InputContainerBigger>
