@@ -40,8 +40,7 @@ const Comment = ({voteScore, body, author, timestamp, onDelete, onEdit, onVoteDo
                 voteScore={voteScore}
                 onVoteUp={onVoteUp}
                 onVoteDown={onVoteDown}
-                voted={''}
-        />
+            />
             <CommentBody>{body}</CommentBody>
         </CommentHeader>
         <PostFooter>

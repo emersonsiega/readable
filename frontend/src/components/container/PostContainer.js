@@ -3,9 +3,16 @@ import { connect } from 'react-redux'
 import { withRouter } from'react-router-dom'
 
 import Post from '../presentational/Post'
-import { handleDeletePost } from '../../store/actions/posts'
+import {
+    handleDeletePost,
+    handleVotePost,
+} from '../../store/actions/posts'
+import {
+    VOTED_DOWN,
+    VOTED_UP,
+} from '../../types'
 
-const PostContainer = ({post = {}, history, onDeletePost}) => {
+const PostContainer = ({post = {}, history, onDeletePost, onVotePost}) => {
     const handleDelete = (e) => {
         e.preventDefault()
         onDeletePost(post.id)
@@ -14,12 +21,12 @@ const PostContainer = ({post = {}, history, onDeletePost}) => {
 
     const handleVoteUp = (e) => {
         e.preventDefault()
-        alert('vote Up')
+        onVotePost(post.id, VOTED_UP)
     }
 
     const handleVoteDown = (e) => {
         e.preventDefault()
-        alert('vote Down')
+        onVotePost(post.id, VOTED_DOWN)
     }
 
     const handleEdit = (e) => {
@@ -51,7 +58,8 @@ const mapStateToProps = ({posts}, {postId}) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    onDeletePost: (id) => dispatch(handleDeletePost(id))
+    onDeletePost: (id) => dispatch(handleDeletePost(id)),
+    onVotePost: (id, vote) => dispatch(handleVotePost(id, vote))
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PostContainer))

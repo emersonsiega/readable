@@ -2,8 +2,7 @@ import {
     string,
     number,
     bool,
-    func, 
-    oneOf,
+    func,
 } from 'prop-types'
 
 const postType = {
@@ -33,18 +32,12 @@ const commentType = {
     onEdit: func.isRequired,
 }
 
-const VOTED_UP = 'up'
-const VOTED_DOWN = 'down'
-const VOTE_NONE = ''
+const VOTED_UP = 'upVote'
+const VOTED_DOWN = 'downVote'
 const voteType = {
     voteScore: number,
     onVoteUp: func.isRequired,
     onVoteDown: func.isRequired,
-    voted: oneOf([
-        VOTED_UP,
-        VOTED_DOWN,
-        VOTE_NONE
-    ])
 }
 
 const THEME_LIGHT = 'light'
@@ -60,7 +53,6 @@ export {
     voteType,
     VOTED_UP,
     VOTED_DOWN, 
-    VOTE_NONE,
     THEME_LIGHT,
     THEME_DARK,
     navType,

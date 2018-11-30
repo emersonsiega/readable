@@ -39,7 +39,7 @@ const Post = (props) => {
     const {
         id, title, body, voteScore, 
         author, timestamp, onVoteDown,
-        onVoteUp, voted, commentCount, 
+        onVoteUp, commentCount, 
         category, onEdit, onDelete
     } = props
 
@@ -55,7 +55,6 @@ const Post = (props) => {
                     onVoteDown={onVoteDown}
                     onVoteUp={onVoteUp}
                     voteScore={voteScore}
-                    voted={voted}
                 />
                 {isCompactMode()
                     ? <Title>{title}</Title>

@@ -5,10 +5,7 @@ import { FaChevronUp, FaChevronDown } from 'react-icons/fa'
 
 import { IconZoom } from './Components'
 import { 
-    voteType, 
-    VOTED_DOWN, 
-    VOTED_UP, 
-    VOTE_NONE 
+    voteType,
 } from '../../types'
 
 const VoteContainer = styled.div`
@@ -30,21 +27,19 @@ const VoteScore = styled.label`
     margin-left: 5px;
 `
 
-const Vote = ({voteScore, onVoteUp, onVoteDown, voted = VOTE_NONE}) => {
-    return (
-        <VoteContainer>
-            <VoteUpDown>
-                <IconZoom highlight={ voted === VOTED_UP }>
-                    <FaChevronUp onClick={onVoteUp} />
-                </IconZoom>
-                <IconZoom highlight={ voted === VOTED_DOWN }>
-                    <FaChevronDown onClick={onVoteDown} />
-                </IconZoom>
-            </VoteUpDown>
-            <VoteScore>{voteScore}</VoteScore>
-        </VoteContainer>
-    )
-}
+const Vote = ({voteScore, onVoteUp, onVoteDown}) => (
+    <VoteContainer>
+        <VoteUpDown>
+            <IconZoom>
+                <FaChevronUp onClick={onVoteUp} />
+            </IconZoom>
+            <IconZoom>
+                <FaChevronDown onClick={onVoteDown} />
+            </IconZoom>
+        </VoteUpDown>
+        <VoteScore>{voteScore}</VoteScore>
+    </VoteContainer>
+)
 
 Vote.propTypes = { ...voteType }
 

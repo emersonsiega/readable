@@ -3,7 +3,10 @@ import {
     INCREASE_COMMENT_COUNTER,
     DECREASE_COMMENT_COUNTER,
     DELETE_POST,
+    VOTE_POST,
 } from '../actions/posts'
+
+import { VOTED_UP } from '../../types'
 
 import { fromArray } from '../../utils/ObjectFormat'
 
@@ -36,6 +39,16 @@ const posts = (state = {}, action) => {
                 [action.id] : {
                     ...state[action.id],
                     deleted: true
+                }
+            }
+        case VOTE_POST:
+            return {
+                ...state,
+                [action.id]: {
+                    ...state[action.id],
+                    voteScore: action.vote === VOTED_UP 
+                        ? state[action.id].voteScore + 1 
+                        : state[action.id].voteScore - 1
                 }
             }
         default:
