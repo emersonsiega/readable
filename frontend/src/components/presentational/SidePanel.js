@@ -2,7 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { withRouter } from 'react-router-dom'
 
-import { Button } from '../presentational/Components'
+import { Button } from './Components'
+import CategoriesContainer from '../container/CategoriesContainer'
 
 const Side = styled.aside`
     position: fixed;
@@ -25,19 +26,8 @@ const Compose = styled(Button)`
     height: 100px;
     max-height: 50px;
     font-size: 1em;
+    margin-bottom: 20px;
 `
-
-//TODO: Move to another component
-const Categories = () => (
-    <>
-        <label>Categories</label>
-        <ul>
-            <li>React</li>
-            <li>Redux</li>
-            <li>ES6</li>
-        </ul>
-    </>
-)
 
 //TODO: Move to another component
 const Sort = () => (
@@ -53,7 +43,7 @@ const Sort = () => (
     </>
 )
 
-const SideContainer = ({history, location}) => {
+const SidePanel = ({history, location}) => {
 
     const handleNewPost = (e) => {
         e.preventDefault()
@@ -66,11 +56,11 @@ const SideContainer = ({history, location}) => {
                 <Compose onClick={handleNewPost}>New post</Compose>
             ) }
             <SideOptions>
-                <Categories></Categories>
+                <CategoriesContainer />
                 <Sort></Sort>
             </SideOptions>
         </Side>
     )
 }
 
-export default withRouter(SideContainer)
+export default withRouter(SidePanel)

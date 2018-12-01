@@ -2,6 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import transition from "styled-transition-group"
 import { Link as RouterLink } from 'react-router-dom'
+import { FaCaretRight } from 'react-icons/fa'
 
 const Button = styled.button`
     background: ${props => props.theme.link};
@@ -177,6 +178,28 @@ const ErrorLabel = ({size, isSelect}) =>
         ? <ErrorLabelStyle>Please select an option</ErrorLabelStyle>
         : <ErrorLabelStyle>Minimum size is { size } characters</ErrorLabelStyle>
 
+const ArrowIndicator = styled(FaCaretRight)`
+    color: ${props => props.theme.link};
+    position: absolute;
+    left: 15px;
+    font-size: 0.8em;
+`
+
+const IndicatorDiv = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+`
+
+const ArrowIndicatorBefore = (props) => (
+    <IndicatorDiv>
+        {props.matched
+            ? <ArrowIndicator />
+            : null}
+        {props.children}
+    </IndicatorDiv>
+)
+
 export {
     Button,
     Icon,
@@ -195,4 +218,6 @@ export {
     ErrorLabel,
     Select,
     Option,
+    ArrowIndicator,
+    ArrowIndicatorBefore,
 }

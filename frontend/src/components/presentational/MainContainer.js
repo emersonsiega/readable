@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import SideContainer from './SideContainer'
+import SidePanel from '../presentational/SidePanel'
 
 const Content = styled.section`
     margin: 65px 20px 0px 20px;
@@ -20,7 +20,7 @@ const MainContainer = (props) =>  (
         <Children>
             {props.children}
         </Children>
-        <SideContainer />
+        <SidePanel />
     </Content>
 )
 

@@ -21,10 +21,10 @@ class App extends Component {
       <NavContainer />
       <MainContainer>
         <Switch>
-          <Route path='/' exact component={PostsList} />
+          <Route path='/new' component={NewPostContainer} />
+          <Route path='/:category?' exact component={PostsList} />
           <Route path='/:category/:post_id/edit' component={NewPostContainer} />
           <Route path='/:category/:post_id' component={PostPageContainer} />
-          <Route path='/new' component={NewPostContainer} />
           {/* <NotFound /> */}
         </Switch>
       </MainContainer>
