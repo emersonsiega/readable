@@ -11,9 +11,9 @@ const fromArray = ( array ) => ({
 })
 
 const toPersist = ( object ) => ({
+    ...object,
     id: v4(),
     timestamp: new Date().getTime(),
-    ...object,
 })
 
 export {
