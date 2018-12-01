@@ -27,7 +27,6 @@ class CategoryAPI {
 
         return request
             .then(response => response.data.categories)
-            .catch(err => err.response )
     }
 }
 
