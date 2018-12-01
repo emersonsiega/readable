@@ -22,6 +22,7 @@ class App extends Component {
       <MainContainer>
         <Switch>
           <Route path='/' exact component={PostsList} />
+          <Route path='/:category/:post_id/edit' component={NewPostContainer} />
           <Route path='/:category/:post_id' component={PostPageContainer} />
           <Route path='/new' component={NewPostContainer} />
           {/* <NotFound /> */}

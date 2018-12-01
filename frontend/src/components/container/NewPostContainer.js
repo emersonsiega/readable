@@ -5,9 +5,10 @@ import { connect } from 'react-redux'
 import NewPost from '../presentational/NewPost'
 import { 
     handleAddPost, 
+    handleEditPost,
 } from '../../store/actions/posts'
 
-const NewPostContainer = ({history, categories = [], addPost}) => {
+const NewPostContainer = ({history, categories = [], post, addPost, editPost}) => {
     const redirect = (id, category) => history.push(`/${category}/${id}`)
 
     const onSubmit = (post) => {
@@ -15,7 +16,8 @@ const NewPostContainer = ({history, categories = [], addPost}) => {
             addPost( post )
                 .then( id => redirect(id, post.category))
         } else {
-            alert('Update will works soon..')
+            editPost(post)
+            redirect(post.id, post.category)
         }
     }
 
@@ -23,16 +25,19 @@ const NewPostContainer = ({history, categories = [], addPost}) => {
         <NewPost 
             onSubmit={onSubmit}
             categories={categories}
+            post={post}
         />
     )
 }
 
-const mapStateToProps = ({categories = {}}) => ({
-    categories: Object.keys(categories).map( k => ({ value: k, text: categories[k] }) ) || []
+const mapStateToProps = ({categories = {}, posts}, {match}) => ({
+    categories: Object.keys(categories).map( k => ({ value: k, text: categories[k] }) ) || [],
+    post: Object.values(posts).find(p => p.id === match.params.post_id)
 })
 
 const mapDispatchToProps = dispatch => ({
-    addPost: post => dispatch(handleAddPost(post))
+    addPost: post => dispatch(handleAddPost(post)),
+    editPost: post => dispatch(handleEditPost(post.id, post.title, post.body))
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NewPostContainer))

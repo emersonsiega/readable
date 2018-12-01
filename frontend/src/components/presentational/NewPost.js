@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
 import {
@@ -35,17 +35,21 @@ const InputBigger = styled(Input)`
     width: 200px;
 `
 
-const INITIAL_STATE = {
-    title: '',
-    body: '',
-    author: '',
-    category: ''
-}
+const initialState = (post = {}) => ({
+    title: post.title || '',
+    body: post.body || '',
+    author: post.author || '',
+    category: post.category || ''
+})
 
 const NewPost = ({onSubmit, post = {}, categories = []}) => {
-    const [fields, addFields] = useState(INITIAL_STATE)
+    const [fields, addFields] = useState(initialState())
     const [error, setError] = useState({})
     const idEditing = post.id !== undefined
+
+    useEffect(() => {
+        addFields(initialState(post))
+    }, [post.id])
 
     const fieldValue = e => {
         const { options } = e.target
@@ -95,6 +99,7 @@ const NewPost = ({onSubmit, post = {}, categories = []}) => {
 
         if ( !err ) {
             onSubmit({
+                id: post.id,
                 title: fields.title,
                 author: fields.author,
                 body: fields.body,
@@ -142,6 +147,7 @@ const NewPost = ({onSubmit, post = {}, categories = []}) => {
                         id='category'
                         placeholder='Category'
                         value={fields.category}
+                        disabled={idEditing}
                         hasError={error.category}
                         onChange={handleChange}
                     >

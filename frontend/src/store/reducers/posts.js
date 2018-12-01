@@ -5,6 +5,7 @@ import {
     DELETE_POST,
     VOTE_POST,
     ADD_POST,
+    EDIT_POST,
 } from '../actions/posts'
 
 import { VOTED_UP } from '../../types'
@@ -57,6 +58,15 @@ const posts = (state = {}, action) => {
                 ...state,
                 [action.post.id]: {
                     ...action.post
+                }
+            }
+        case EDIT_POST:
+            return {
+                ...state,
+                [action.id]: {
+                    ...state[action.id],
+                    title: action.title,
+                    body: action.body,
                 }
             }
         default:

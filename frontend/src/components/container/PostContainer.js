@@ -31,7 +31,8 @@ const PostContainer = ({post = {}, history, onDeletePost, onVotePost}) => {
 
     const handleEdit = (e) => {
         e.preventDefault()
-        alert('edited')
+
+        history.push(`/${post.category}/${post.id}/edit`)
     }
 
     return (
@@ -59,7 +60,7 @@ const mapStateToProps = ({posts}, {postId}) => ({
 
 const mapDispatchToProps = dispatch => ({
     onDeletePost: (id) => dispatch(handleDeletePost(id)),
-    onVotePost: (id, vote) => dispatch(handleVotePost(id, vote))
+    onVotePost: (id, vote) => dispatch(handleVotePost(id, vote)),
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PostContainer))

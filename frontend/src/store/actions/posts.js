@@ -75,6 +75,19 @@ const handleAddPost = (post) => dispatch => {
         .catch( err => console.log('Failed to add post', err) )
 }
 
+const editPost = (id, title, body) => ({
+    type: EDIT_POST,
+    id,
+    title,
+    body,
+})
+
+const handleEditPost = (id, title, body) => dispatch => {
+    PostsAPI.editPost(id, title, body)
+        .then(_ => dispatch(editPost(id, title, body)) )
+        .catch(err => console.log('Failed to edit post', err))
+}
+
 export {
     FETCH_POSTS,
     INCREASE_COMMENT_COUNTER,
@@ -90,4 +103,5 @@ export {
     handleDeletePost,
     handleVotePost,
     handleAddPost,
+    handleEditPost,
 }
