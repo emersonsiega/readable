@@ -15,21 +15,21 @@ class CommentsAPI {
     })
     
     static newComment(comment) {
-        const request = this._service.post( '', JSON.stringify({ comment }) )
+        const request = this._service.post( '', comment )
 
         return request
             .then(response => response.data)
     }
 
     static voteComment(id, vote) {
-        const request = this._service.post( `/${id}`, JSON.stringify({ vote }) )
+        const request = this._service.post( `/${id}`, {option: vote} )
 
         return request
             .then(response => response.data)
     }
 
     static editComment(commentId, timestamp, body) {
-        const request = this._service.put( `/${commentId}`, JSON.stringify({ timestamp, body }) )
+        const request = this._service.put( `/${commentId}`, {timestamp, body} )
 
         return request
             .then(response => response.data)

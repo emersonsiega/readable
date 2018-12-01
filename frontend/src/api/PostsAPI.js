@@ -39,7 +39,7 @@ class PostsAPI {
     }
 
     static newPost(post) {
-        const request = this._service.post( '', JSON.stringify({ post }) )
+        const request = this._service.post( '', post )
 
         return request
             .then(response => response.data)
@@ -47,7 +47,7 @@ class PostsAPI {
     }
 
     static editPost(postID, title, body) {
-        const request = this._service.put( `/${postID}`, JSON.stringify({ title, body }) )
+        const request = this._service.put( `/${postID}`, { title, body } )
 
         return request
             .then(response => response.data)
@@ -63,7 +63,7 @@ class PostsAPI {
     }
 
     static votePost(id, vote) {
-        const request = this._service.post( `/${id}`, JSON.stringify({ vote }) )
+        const request = this._service.post( `/${id}`, { option: vote } )
 
         return request
             .then(response => response.data)

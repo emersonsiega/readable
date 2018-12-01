@@ -38,18 +38,15 @@ const addComment = (comment) => ({
 const formatComment = (comment) => ({
     id: v4(),
     timestamp: new Date().getTime(),
-    deleted: false,
-    voteScore: 0,
     ...comment,
 })
 
 const handleAddComment = comment => dispatch => {
     const newComment = formatComment(comment)
 
-    dispatch(addComment(newComment))
-
     CommentsAPI.newComment(newComment)
-        .then(_ => {
+        .then(data => {
+            dispatch(addComment({ ...newComment, ...data }))
             dispatch(increaseCommentCounter(newComment.parentId))
         })
         .catch( err => {
