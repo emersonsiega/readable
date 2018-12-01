@@ -5,7 +5,7 @@ const toObject = (value) => ({
 })
 
 const fromArray = ( array ) => ({
-    ...array.reduce((acc, value) => Object.assign({}, toObject(acc), toObject(value)))
+    ...array.reduce((acc, value) => Object.assign({}, {...acc}, toObject(value)), {})
 })
 
 export {
