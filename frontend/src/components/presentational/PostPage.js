@@ -5,7 +5,9 @@ import PostContainer from '../container/PostContainer'
 import CommentsList from '../container/CommentsList'
 import NewCommentContainer from '../container/NewCommentContainer'
 
-const PostPageArticle = styled.article``
+const PostPageArticle = styled.article`
+    width: 100%;
+`
 
 const Reply = styled.div`
     font-size: 1.1em;

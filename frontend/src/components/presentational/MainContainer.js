@@ -12,7 +12,7 @@ const Content = styled.section`
 
 const Children = styled.div`
     display: flex;
-    flex-grow: 2;
+    width: 75%;
 `
 
 const MainContainer = (props) =>  (

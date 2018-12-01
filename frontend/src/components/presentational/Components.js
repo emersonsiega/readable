@@ -64,7 +64,7 @@ const PostContainer = styled.article`
     background: ${props => props.theme.foreground};
     color: ${props => props.theme.color};
     min-height: 9em;
-    max-width: 100%;
+    width: 100%;
     padding: 10px;
     margin: 5px 0px 5px 0px;
     border-radius: 5px;
