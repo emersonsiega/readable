@@ -19,7 +19,6 @@ class PostsAPI {
 
         return request
             .then(response => response.data)
-            .catch(err => err.response)
     }
 
     static getPost(postId) {
@@ -27,7 +26,6 @@ class PostsAPI {
 
         return request
             .then(response => response.data)
-            .catch(err => err.response)
     }
 
     static comments(postId) {
@@ -35,7 +33,6 @@ class PostsAPI {
 
         return request
             .then(response => response.data)
-            .catch(err => err.response)
     }
 
     static newPost(post) {
@@ -43,7 +40,6 @@ class PostsAPI {
 
         return request
             .then(response => response.data)
-            .catch(err => err.response)
     }
 
     static editPost(postID, title, body) {
@@ -51,7 +47,6 @@ class PostsAPI {
 
         return request
             .then(response => response.data)
-            .catch(err => err.response)
     }
 
     static deletePost(postID) {
@@ -59,7 +54,6 @@ class PostsAPI {
 
         return request
             .then(response => response.data)
-            .catch(err => err.response)
     }
 
     static votePost(id, vote) {
@@ -67,7 +61,6 @@ class PostsAPI {
 
         return request
             .then(response => response.data)
-            .catch(err => err.response)
     }
 
 }

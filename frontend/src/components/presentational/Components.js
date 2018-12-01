@@ -1,3 +1,4 @@
+import React from 'react'
 import styled, { css } from 'styled-components'
 import transition from "styled-transition-group"
 import { Link as RouterLink } from 'react-router-dom'
@@ -151,14 +152,30 @@ const inputStyle = css`
 
 const Input = styled.input`${inputStyle}`
 
-const InputArea = styled.textarea`
+const InputArea = styled.textarea`${inputStyle}`
+
+const Select = styled.select`
     ${inputStyle}
-    min-height: 3.5em;
+    cursor: pointer;
+    min-width: 150px;
 `
 
-const ErrorLabel = styled.label`
-    color: ${props => props.theme.error};
+const Option = styled.option`
+    background: ${props => props.theme.foreground};
+    color: ${props => props.theme.color};
+    cursor: pointer;
 `
+
+const ErrorLabelStyle = styled.label`
+    color: ${props => props.theme.error};
+    font-size: 0.9em;
+    font-weight: 300;
+`
+
+const ErrorLabel = ({size, isSelect}) =>
+    isSelect === true 
+        ? <ErrorLabelStyle>Please select an option</ErrorLabelStyle>
+        : <ErrorLabelStyle>Minimum size is { size } characters</ErrorLabelStyle>
 
 export {
     Button,
@@ -176,4 +193,6 @@ export {
     Input,
     InputArea,
     ErrorLabel,
+    Select,
+    Option,
 }

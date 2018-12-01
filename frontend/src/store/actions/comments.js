@@ -1,5 +1,3 @@
-import v4 from 'uuid/v4'
-
 import PostsAPI from '../../api/PostsAPI'
 import CommentsAPI from '../../api/CommentsAPI'
 import { 
@@ -10,6 +8,7 @@ import {
     VOTED_DOWN,
     VOTED_UP,
 } from '../../types'
+import { toPersist } from '../../utils/ObjectFormat'
 
 const FETCH_COMMENTS_BY_POST = 'FETCH_COMMENTS_BY_POST'
 const ADD_COMMENT = 'ADD_COMMENT'
@@ -35,14 +34,8 @@ const addComment = (comment) => ({
     comment
 })
 
-const formatComment = (comment) => ({
-    id: v4(),
-    timestamp: new Date().getTime(),
-    ...comment,
-})
-
 const handleAddComment = comment => dispatch => {
-    const newComment = formatComment(comment)
+    const newComment = toPersist(comment)
 
     CommentsAPI.newComment(newComment)
         .then(data => {

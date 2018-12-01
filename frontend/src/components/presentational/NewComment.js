@@ -110,14 +110,13 @@ class NewComment extends Component {
                     <InputArea
                         tabIndex={1}
                         id='body'
+                        rows={4}
                         placeholder='What are your thoughts?'
                         hasError={error.body}
                         value={body}
                         onChange={this.onChangeField}
                     />
-                    {error.body === true && (
-                        <ErrorLabel>Minimum size is 10 characters</ErrorLabel>
-                    )}
+                    {error.body === true && <ErrorLabel size={10} />}
                 </InputContainer>
                 <FooterDiv>
                     <InputContainerBigger>
@@ -131,9 +130,7 @@ class NewComment extends Component {
                             value={author}
                             onChange={this.onChangeField}
                         />
-                        {error.author === true && (
-                            <ErrorLabel>Minimum size is 2 characters</ErrorLabel>
-                        )}
+                        {error.author === true && <ErrorLabel size={2} />}
                     </InputContainerBigger>
                     <ButtonDiv>
                         <Button 

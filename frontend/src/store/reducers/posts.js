@@ -4,6 +4,7 @@ import {
     DECREASE_COMMENT_COUNTER,
     DELETE_POST,
     VOTE_POST,
+    ADD_POST,
 } from '../actions/posts'
 
 import { VOTED_UP } from '../../types'
@@ -49,6 +50,13 @@ const posts = (state = {}, action) => {
                     voteScore: action.vote === VOTED_UP 
                         ? state[action.id].voteScore + 1 
                         : state[action.id].voteScore - 1
+                }
+            }
+        case ADD_POST:
+            return {
+                ...state,
+                [action.post.id]: {
+                    ...action.post
                 }
             }
         default:
