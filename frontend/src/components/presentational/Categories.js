@@ -6,20 +6,12 @@ import { withRouter } from 'react-router-dom'
 import { 
     Link, 
     ArrowIndicatorBefore,
+    SidePanelTitleDiv,
+    SidePanelTitle,
+    SidePanelItemList,
 } from './Components'
 
 const CategoryContainer = styled.div``
-
-const TitleDiv = styled.div`
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    font-size: 1.5em;
-`
-
-const Title = styled.label`
-    margin-left: 10px;
-`
 
 const Category = styled(Link)`
     margin: 0;
@@ -28,22 +20,15 @@ const Category = styled(Link)`
         : props.theme.color};
 `
 
-const CategoryList = styled.div`
-    display: flex;
-    flex-direction: column;
-    margin: 0 0 5px 30px;
-    font-size: 1em;
-`
-
 const matches = (location, url='') => location.pathname === `/${url}` ? 1 : 0
 
 const Categories = ({categories, location}) => (
     <CategoryContainer>
-        <TitleDiv>
+        <SidePanelTitleDiv>
             <FaCubes />
-            <Title>Categories</Title>
-        </TitleDiv>
-        <CategoryList>
+            <SidePanelTitle>Categories</SidePanelTitle>
+        </SidePanelTitleDiv>
+        <SidePanelItemList>
             <ArrowIndicatorBefore matched={matches(location)}>
                 <Category matched={matches(location)} to='/'>ALL</Category>
             </ArrowIndicatorBefore>
@@ -60,7 +45,7 @@ const Categories = ({categories, location}) => (
                     </Category>
                 </ArrowIndicatorBefore>
             ))}
-        </CategoryList>
+        </SidePanelItemList>
     </CategoryContainer>
 )
 

@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom'
 
 import { Button } from './Components'
 import CategoriesContainer from '../container/CategoriesContainer'
+import SortContainer from '../container/SortContainer'
 
 const Side = styled.aside`
     position: fixed;
@@ -29,20 +30,6 @@ const Compose = styled(Button)`
     margin-bottom: 20px;
 `
 
-//TODO: Move to another component
-const Sort = () => (
-    <>
-        <label>Sort posts</label>
-        <ul>
-            <li>Newest</li>
-            <li>Oldest</li>
-            <li>More popular</li>
-            <li>Less popular</li>
-            <li>More commented</li>
-        </ul>
-    </>
-)
-
 const SidePanel = ({history, location}) => {
 
     const handleNewPost = (e) => {
@@ -57,7 +44,7 @@ const SidePanel = ({history, location}) => {
             ) }
             <SideOptions>
                 <CategoriesContainer />
-                <Sort></Sort>
+                <SortContainer />
             </SideOptions>
         </Side>
     )

@@ -200,6 +200,24 @@ const ArrowIndicatorBefore = (props) => (
     </IndicatorDiv>
 )
 
+const SidePanelTitleDiv = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 1.5em;
+`
+
+const SidePanelTitle = styled.label`
+    margin-left: 10px;
+`
+
+const SidePanelItemList = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 5px 30px;
+    font-size: 1em;
+`
+
 export {
     Button,
     Icon,
@@ -220,4 +238,7 @@ export {
     Option,
     ArrowIndicator,
     ArrowIndicatorBefore,
+    SidePanelTitleDiv,
+    SidePanelTitle,
+    SidePanelItemList,
 }

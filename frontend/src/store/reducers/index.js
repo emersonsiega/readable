@@ -5,6 +5,7 @@ import comments from '../reducers/comments'
 import theme from '../reducers/theme'
 import loggedUser from '../reducers/loggedUser'
 import categories from '../reducers/categories'
+import sort from './sort'
 
 export default combineReducers({
     posts,
@@ -12,4 +13,5 @@ export default combineReducers({
     theme,
     loggedUser,
     categories,
+    sort,
 })

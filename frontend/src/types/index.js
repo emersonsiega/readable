@@ -47,6 +47,16 @@ const navType = {
     toggleTheme: func.isRequired
 }
 
+const SortType = {
+    timestamp: "timestamp",
+    voteScore: "voteScore",
+}
+
+const OrderType = {
+    asc: "ASC",
+    desc: "DESC"
+}
+
 export {
     postType,
     commentType,
@@ -56,4 +66,6 @@ export {
     THEME_LIGHT,
     THEME_DARK,
     navType,
+    SortType,
+    OrderType,
 }
