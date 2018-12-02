@@ -1,3 +1,8 @@
+import {
+    showLoading,
+    hideLoading
+} from 'react-redux-loading'
+
 import PostsAPI from '../../api/PostsAPI'
 import CommentsAPI from '../../api/CommentsAPI'
 import { 
@@ -35,16 +40,19 @@ const addComment = (comment) => ({
 })
 
 const handleAddComment = comment => dispatch => {
+    dispatch( showLoading() )
     const newComment = toPersist(comment)
 
     CommentsAPI.newComment(newComment)
         .then(data => {
             dispatch(addComment({ ...newComment, ...data }))
             dispatch(increaseCommentCounter(newComment.parentId))
+            dispatch(hideLoading())
         })
         .catch( err => {
             console.warn('Failed to save comment', err)
             dispatch(deleteComment(newComment.id, newComment.parentId))
+            dispatch(hideLoading())
         })
 }
 
@@ -71,9 +79,16 @@ const editComment = (parentId, id, body) => ({
 })
 
 const handleEditComment = (parentId, id, body, timestamp) => dispatch => {
+    dispatch(showLoading())
     CommentsAPI.editComment(id, timestamp, body)
-        .then( _ => dispatch(editComment(parentId, id, body)))
-        .catch( err => console.log('Failed to edit comment', err))
+        .then( _ => {
+            dispatch(editComment(parentId, id, body))
+            dispatch(hideLoading())
+        })
+        .catch( err => {
+            console.log('Failed to edit comment', err)
+            dispatch(hideLoading())
+        })
 }
 
 const toggleEditing = (id, parentId) => ({
@@ -90,12 +105,15 @@ const voteComment = (parentId, id, vote) => ({
 })
 
 const handleVoteComment = (parentId, id, vote) => dispatch => {
+    dispatch(showLoading())
     dispatch(voteComment(parentId, id, vote))
 
     CommentsAPI.voteComment(id, vote)
+        .then(_ => dispatch(hideLoading()))
         .catch( err => {
             console.log(`Failed to ${vote} comment`, err)
             dispatch(voteComment(parentId, id, vote === VOTED_UP ? VOTED_DOWN : VOTED_UP))
+            dispatch(hideLoading())
         })
 }
 

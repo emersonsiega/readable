@@ -9,6 +9,7 @@ import MainContainer from '../presentational/MainContainer'
 import PostsList from './PostsList'
 import PostPageContainer from './PostPageContainer';
 import NewPostContainer from './NewPostContainer'
+import Loading from '../presentational/Loading'
 
 class App extends Component {
   componentDidMount() {
@@ -18,14 +19,14 @@ class App extends Component {
 
   render = () => (
     <ThemeProvider>
+      <Loading />
       <NavContainer />
       <MainContainer>
         <Switch>
-          <Route path='/new' component={NewPostContainer} />
+          <Route path='/new' exact component={NewPostContainer} />
           <Route path='/:category?' exact component={PostsList} />
           <Route path='/:category/:post_id/edit' component={NewPostContainer} />
           <Route path='/:category/:post_id' component={PostPageContainer} />
-          {/* <NotFound /> */}
         </Switch>
       </MainContainer>
     </ThemeProvider>

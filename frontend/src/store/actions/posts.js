@@ -1,3 +1,8 @@
+import {
+    showLoading,
+    hideLoading
+} from 'react-redux-loading'
+
 import PostsAPI from '../../api/PostsAPI'
 import {
     VOTED_UP,
@@ -38,10 +43,18 @@ const deletePost = id => ({
     id,
 })
 
-const handleDeletePost = (id) => dispatch =>
+const handleDeletePost = (id) => dispatch => {
+    dispatch(showLoading())
     PostsAPI.deletePost(id)
-        .then(_ => dispatch(deletePost(id)))
-        .catch( err =>  console.log('Failed to delete post', err) )
+        .then(_ => {
+            dispatch(deletePost(id))
+            dispatch(hideLoading())
+        })
+        .catch( err =>  {
+            console.log('Failed to delete post', err) 
+            dispatch(hideLoading())
+        })
+}
 
 const votePost = (id, vote) => ({
     type: VOTE_POST,
@@ -50,12 +63,15 @@ const votePost = (id, vote) => ({
 })
 
 const handleVotePost = (id, vote) => dispatch => {
+    dispatch(showLoading())
     dispatch(votePost(id, vote))
 
     PostsAPI.votePost(id, vote)
+        .then(_ => dispatch(hideLoading()))
         .catch(err => {
             console.log(`Failed to ${vote} post`, err)
             dispatch(votePost(id, vote === VOTED_UP ? VOTED_DOWN : VOTED_UP))
+            dispatch(hideLoading())
         })
 }
 
@@ -65,14 +81,19 @@ const addPost = (post) => ({
 })
 
 const handleAddPost = (post) => dispatch => {
+    dispatch(showLoading())
     const newPost = toPersist(post)
 
     return PostsAPI.newPost(newPost)
         .then( data => {
             dispatch(addPost({ ...newPost, ...data })) 
+            dispatch(hideLoading())
             return newPost.id
         })
-        .catch( err => console.log('Failed to add post', err) )
+        .catch( err => {
+            console.log('Failed to add post', err) 
+            dispatch(hideLoading())
+        })
 }
 
 const editPost = (id, title, body) => ({
@@ -83,9 +104,16 @@ const editPost = (id, title, body) => ({
 })
 
 const handleEditPost = (id, title, body) => dispatch => {
+    dispatch(showLoading())
     PostsAPI.editPost(id, title, body)
-        .then(_ => dispatch(editPost(id, title, body)) )
-        .catch(err => console.log('Failed to edit post', err))
+        .then(_ => {
+            dispatch(editPost(id, title, body)) 
+            dispatch(hideLoading())
+        })
+        .catch(err => {
+            console.log('Failed to edit post', err)
+            dispatch(hideLoading())
+        })
 }
 
 export {
