@@ -4,6 +4,7 @@ import { TransitionGroup } from 'react-transition-group'
 
 import { Fade } from '../presentational/Components'
 import CommentContainer from './CommentContainer'
+import SortHelper from '../../utils/SortHelper'
 
 const CommentsList = ({ comments = [] }) => (
     <TransitionGroup>
@@ -17,8 +18,12 @@ const CommentsList = ({ comments = [] }) => (
     </TransitionGroup>
 )
 
-const mapStateToProps = ({comments = {}}, {postId}) => ({
-    comments: Object.values(comments[postId] || {})
-})
+const mapStateToProps = ({comments = {}, sort = {}}, {postId}) => {
+    const orderedComments = SortHelper(Object.values(comments[postId] || {}), sort)
+    
+    return {
+        comments: orderedComments
+    }
+}
 
 export default connect(mapStateToProps)(CommentsList)

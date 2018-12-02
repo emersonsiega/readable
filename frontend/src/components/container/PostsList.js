@@ -5,6 +5,7 @@ import { TransitionGroup } from 'react-transition-group'
 
 import PostContainer from './PostContainer'
 import { Fade } from '../presentational/Components'
+import SortHelper from '../../utils/SortHelper'
 
 const PostsList = ({posts = []}) => (
     <TransitionGroup>
@@ -16,8 +17,16 @@ const PostsList = ({posts = []}) => (
     </TransitionGroup>
 )
 
-const mapStateToProps = ({posts}, {match}) => ({
-    posts: Object.values(posts).filter(post => !match.params.category || post.category === match.params.category)
-})
+const mapStateToProps = ({posts, sort}, {match}) => {
+    const sortedPosts = SortHelper( Object.values(posts), sort )
+    
+    const filteredPosts = sortedPosts.filter( 
+        post => !match.params.category || post.category === match.params.category 
+    )
+
+    return {
+        posts: filteredPosts
+    }
+}
 
 export default withRouter(connect(mapStateToProps)(PostsList))
