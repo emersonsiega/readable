@@ -18,6 +18,7 @@ import Vote from './Vote'
 
 const CommentContainer = styled(PostContainer)`
     max-height: 9em;
+    filter: ${props => props.isBeingEdited ? 'blur(2px)' : 'none'};
 `
 
 const CommentHeader = styled(PostHeader)`
@@ -33,8 +34,8 @@ const IconZoomMedium = styled(IconZoom)`
     font-size: 1.5em;
 `
 
-const Comment = ({voteScore, body, author, timestamp, onDelete, onEdit, onVoteDown, onVoteUp}) => (
-    <CommentContainer>
+const Comment = ({ voteScore, body, author, timestamp, onDelete, onEdit, onVoteDown, onVoteUp, isBeingEdited }) => (
+    <CommentContainer isBeingEdited={isBeingEdited}>
         <CommentHeader>
             <Vote 
                 voteScore={voteScore}

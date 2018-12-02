@@ -45,6 +45,7 @@ const CommentContainer = ({comment, onDelete, onEdit, onVote}) => {
             onEdit={onEditClick}
             onVoteUp={onVoteUp}
             onVoteDown={onVoteDown}
+            isBeingEdited={comment.isBeingEdited}
         />
     )
 }
