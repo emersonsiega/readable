@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
 import { 
@@ -31,119 +31,98 @@ const InputContainerBigger = styled(InputContainer)`
     margin-right: 20px;
 `
 
-const initialState = () => ({
-    fields: {
-        body: '',
-        author: '',
-    },
-    error: {}
+const initialState = (comment = {}) => ({
+    body: comment.body || '',
+    author: comment.author || ''
 })
 
-class NewComment extends Component {
-    constructor(props) {
-        super(props)
+const NewComment = ({comment = {}, onSubmit, postId}) => {
+    const [fields, addFields] = useState(initialState())
+    const [error, setError] = useState({})
+    const isBeingEdited = comment !== undefined && comment.isBeingEdited === true
 
-        this.state = initialState()
+    useEffect(() => {
+        addFields(initialState(comment))
+    }, [comment.id])
+
+    const handleChange = (e) => {
+        const { id, value } = e.target
+
+        addFields({
+            ...fields,
+            [id]: value
+        })
     }
 
-    onChangeField = (e) => {
-        const {id, value} = e.target
+    const hasError = (validations) => {
+        const errors = validations.reduce((acc, v) =>
+            Object.assign({}, { ...acc }, { [v.id]: v.validate() }), {})
 
-        this.setState((state) => ({
-            fields: {
-                ...state.fields,
-                [id]: value
-            }
-        }))
-    }
-
-    hasError = () => {
-        const { body = '', author = '' } = this.state.fields
-        const error = {
-            body: body.length < 10,
-            author: author.length < 2
-        }
-
-        this.setState({
-            error
+        setError({
+            ...error,
+            ...errors
         })
 
-        return error.body || error.author
+        return Object.values(errors).indexOf(true) !== -1
     }
 
-    verifyAndSubmit = (e) => {
+    const verifyAndSubmit = (e) => {
         e.preventDefault()
 
-        if ( this.hasError() ) {
-            return
-        }
+        const err = hasError([
+            { id: 'body', validate: () => fields.body.length < 10 },
+            { id: 'author', validate: () => fields.author.length < 2 },
+        ])
 
-        this.props.onSubmit({
-            ...this.state.fields,
-            parentId: this.props.postId
-        })
-
-        this.setState(initialState())
-    }
-
-    componentDidUpdate( prevProps ) {
-        const { comment } = this.props
-        if ( comment !== prevProps.comment ) {
-            this.setState({
-                fields: {
-                    body: comment ? comment.body : '',
-                    author: comment ? comment.author : ''
-                }
+        if (!err) {
+            onSubmit({
+                parentId: postId,
+                author: fields.author,
+                body: fields.body,
             })
+            addFields(initialState())
         }
     }
 
-    render() {
-        const { body, author } = this.state.fields
-        const { error } = this.state
-        const { comment } = this.props
-        const isBeingEdited = comment !== null && comment.isBeingEdited === true
-
-        return (
-            <PostContainer>
-                <InputContainer>
-                    <InputArea
-                        tabIndex={1}
-                        id='body'
-                        rows={4}
-                        placeholder='What are your thoughts?'
-                        hasError={error.body}
-                        value={body}
-                        onChange={this.onChangeField}
+    return (
+        <PostContainer>
+            <InputContainer>
+                <InputArea
+                    tabIndex={1}
+                    id='body'
+                    rows={4}
+                    placeholder='What are your thoughts?'
+                    hasError={error.body}
+                    value={fields.body}
+                    onChange={handleChange}
+                />
+                {error.body === true && <ErrorLabel size={10} />}
+            </InputContainer>
+            <FooterDiv>
+                <InputContainerBigger>
+                    <Input
+                        tabIndex={2}
+                        id='author'
+                        type='text'
+                        disabled={isBeingEdited}
+                        placeholder='Author'
+                        hasError={error.author}
+                        value={fields.author}
+                        onChange={handleChange}
                     />
-                    {error.body === true && <ErrorLabel size={10} />}
-                </InputContainer>
-                <FooterDiv>
-                    <InputContainerBigger>
-                        <Input
-                            tabIndex={2}
-                            id='author'
-                            type='text'
-                            disabled={isBeingEdited}
-                            placeholder='Author'
-                            hasError={error.author}
-                            value={author}
-                            onChange={this.onChangeField}
-                        />
-                        {error.author === true && <ErrorLabel size={2} />}
-                    </InputContainerBigger>
-                    <ButtonDiv>
-                        <Button 
-                            tabIndex={3}
-                            onClick={this.verifyAndSubmit}
-                        >
-                        Compose
-                        </Button>
-                    </ButtonDiv>
-                </FooterDiv>
-            </PostContainer>
-        )
-    }
+                    {error.author === true && <ErrorLabel size={2} />}
+                </InputContainerBigger>
+                <ButtonDiv>
+                    <Button 
+                        tabIndex={3}
+                        onClick={verifyAndSubmit}
+                    >
+                    Compose
+                    </Button>
+                </ButtonDiv>
+            </FooterDiv>
+        </PostContainer>
+    )
 }
 
 export default NewComment

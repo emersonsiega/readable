@@ -12,7 +12,7 @@ const NewCommentContainer = (props) => {
     const postComment = ({ body, author }) => {
         const { comment, postId, editComment, addComment } = props
 
-        if ( comment !== null && comment.isBeingEdited === true ) {
+        if ( comment !== undefined && comment.isBeingEdited === true ) {
             editComment(comment, body)
         } else {
             addComment(postId, body, author)
@@ -29,7 +29,7 @@ const NewCommentContainer = (props) => {
 }
 
 const mapStateToProps = ({comments}, {postId}) => ({
-    comment: Object.values(comments[postId] || {}).find(c => c.isBeingEdited === true) || null
+    comment: Object.values(comments[postId] || {}).find(c => c.isBeingEdited === true)
 })
 
 const mapDispatchToProps = dispatch => ({
