@@ -6,15 +6,19 @@ import { TransitionGroup } from 'react-transition-group'
 import PostContainer from './PostContainer'
 import { Fade } from '../presentational/Components'
 import SortHelper from '../../utils/SortHelper'
+import PostNotFound from '../presentational/PostNotFound'
 
 const PostsList = ({posts = []}) => (
-    <TransitionGroup>
-        {posts.map( (post, i) => post.deleted === false && (
-            <Fade key={post.id} timeout={500} time={500 + i * 10}>
-                <PostContainer postId={post.id} />
-            </Fade>
-        ) )}
-    </TransitionGroup>
+    <>
+        { posts.length === 0 && <PostNotFound/> }
+        <TransitionGroup>
+            {posts.map( (post, i) => post.deleted === false && 
+                <Fade key={post.id} timeout={500} time={500 + i * 10}>
+                    <PostContainer postId={post.id} />
+                </Fade>
+            )}
+        </TransitionGroup>
+    </>
 )
 
 const mapStateToProps = ({posts, sort}, {match}) => {

@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom'
 
 import { handleFetchComments } from '../../store/actions/comments'
 import PostPage from '../presentational/PostPage'
+import PostNotFound from '../presentational/PostNotFound'
 
 class PostPageContainer extends Component {
     componentDidMount() {
@@ -17,7 +18,7 @@ class PostPageContainer extends Component {
                     postId={this.props.post.id}
                     commentCount={this.props.post.commentCount}
                 />
-            :   null
+            :   <PostNotFound />
     }
 }
 
