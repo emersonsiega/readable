@@ -1,0 +1,15 @@
+{
+    "name": "udacity-readable",
+    "version": "0.1.0",
+    "description": "Udacity Reddit Clone project for ReactND",
+    "author": "Emerson Siega",
+    "license": "ISC",
+    "dependencies": {
+        "node": "^11.2.0",
+        "yarn": "^1.12.3"
+    },
+    "scripts": {
+        "start": "cd api-server && yarn install && node server.js",
+        "postinstall": "cd frontend && yarn install && yarn build"
+    }
+}
