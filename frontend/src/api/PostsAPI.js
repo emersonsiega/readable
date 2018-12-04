@@ -5,7 +5,7 @@ import { getToken } from '../utils/TokenHelper'
 class PostsAPI {
     //TODO: buscar o endpoint de algum lugar...
     static _service = axios.create({
-        baseURL: "http://localhost:3001/api/posts",
+        baseURL: `http://${window.origin}/api/posts`,
         timeout: 20000,
         headers: {
             'Accept': 'application/json',
