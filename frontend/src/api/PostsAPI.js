@@ -1,11 +1,11 @@
 import axios from 'axios'
 
 import { getToken } from '../utils/TokenHelper'
+import { url } from './Config'
 
 class PostsAPI {
-    //TODO: buscar o endpoint de algum lugar...
     static _service = axios.create({
-        baseURL: `http://${window.origin}/api/posts`,
+        baseURL: `${url}/posts`,
         timeout: 20000,
         headers: {
             'Accept': 'application/json',
