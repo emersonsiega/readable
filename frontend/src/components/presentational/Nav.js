@@ -39,28 +39,21 @@ const ThemeToggler = styled.div`
     font-size: 1.7em;
 `
 
-const Nav = (props) => {
-    const handleThemeToggle = () => {
-        console.log(props.theme)
-        props.toggleTheme()
-    }
-
-    return (
-        <NavHeader>
-            <AppTitle>
-                <Link to='/'>Readable</Link>
-            </AppTitle>
-            <ThemeToggler>
-                <IconZoom onClick={handleThemeToggle}>
-                    {props.theme === THEME_LIGHT 
-                        ? <FaMoon />
-                        : <FaSun />
-                    }
-                </IconZoom> 
-            </ThemeToggler>
-        </NavHeader>
-    )
-}
+const Nav = ({toggleTheme, theme}) => (
+    <NavHeader>
+        <AppTitle>
+            <Link to='/'>Readable</Link>
+        </AppTitle>
+        <ThemeToggler>
+            <IconZoom onClick={toggleTheme}>
+                {theme === THEME_LIGHT 
+                    ? <FaMoon />
+                    : <FaSun />
+                }
+            </IconZoom> 
+        </ThemeToggler>
+    </NavHeader>
+)
 
 Nav.propTypes = { ...navType }
 

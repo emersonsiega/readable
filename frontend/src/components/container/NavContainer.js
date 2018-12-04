@@ -4,12 +4,13 @@ import { withTheme } from 'styled-components'
 
 import { handleToggleTheme } from '../../store/actions/theme'
 
-const mapDispatchToProps = ({
-    toggleTheme: handleToggleTheme
+const mapDispatchToProps = dispatch => ({
+    toggleTheme: e => {
+        e.preventDefault()
+        dispatch(handleToggleTheme())
+    }
 })
 
-const mapStateToProps = ({theme}) => ({
-    theme: theme
-})
+const mapStateToProps = ({theme}) => ({theme})
 
-export default connect( mapStateToProps, mapDispatchToProps )(withTheme(Nav))
+export default connect(mapStateToProps, mapDispatchToProps)(withTheme(Nav))
