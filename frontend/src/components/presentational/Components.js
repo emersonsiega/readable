@@ -44,16 +44,16 @@ const IconZoom = styled(Icon)`
 `
 
 const Fade = transition.div`
-  &:enter { opacity: 0.01; }
-  &:enter-active {
-    opacity: 1;
-    transition: opacity ${props => props.time ? props.time : 0}ms ease-in;
-  }
-  &:exit { opacity: 1; }
-  &:exit-active {
-    opacity: 0.01;
-    transition: opacity 500ms ease-in;
-  }
+    &:enter { opacity: 0.01; }
+    &:enter-active {
+        opacity: 1;
+        transition: opacity ${props => props.time ? props.time : 0}ms ease-in;
+    }
+    &:exit { opacity: 1; }
+    &:exit-active {
+        opacity: 0.01;
+        transition: opacity 500ms ease-in;
+    }
 `
 
 const Link = styled(RouterLink)`
@@ -218,6 +218,10 @@ const SidePanelItemList = styled.div`
     font-size: 1em;
 `
 
+const FullDiv = styled.div`
+    width: 100%;
+`
+
 export {
     Button,
     Icon,
@@ -241,4 +245,5 @@ export {
     SidePanelTitleDiv,
     SidePanelTitle,
     SidePanelItemList,
+    FullDiv,
 }

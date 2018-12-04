@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { FaLongArrowAltLeft, FaSadCry } from 'react-icons/fa'
+import { FaSadCry } from 'react-icons/fa'
 
 import { Link, IconZoom } from './Components'
 
@@ -42,12 +42,11 @@ const PostNotFound = () => (
     <PostNotFoundContainer>
         <Content>
             <Icon>
-                <FaSadCry />
+                <HomeLink to='/'>
+                    <FaSadCry />
+                </HomeLink>
             </Icon>
-            <PostNotFoundMessage>Post not found</PostNotFoundMessage>
-            <HomeLink to='/'>
-                <FaLongArrowAltLeft /> Back to home
-            </HomeLink>
+            <PostNotFoundMessage>Post not found!</PostNotFoundMessage>
         </Content>
     </PostNotFoundContainer>
 )
