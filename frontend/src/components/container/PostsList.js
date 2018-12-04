@@ -4,12 +4,12 @@ import { withRouter } from 'react-router-dom'
 import { TransitionGroup } from 'react-transition-group'
 
 import PostContainer from './PostContainer'
-import { Fade } from '../presentational/Components'
+import { Fade, FullDiv } from '../presentational/Components'
 import SortHelper from '../../utils/SortHelper'
 import PostNotFound from '../presentational/PostNotFound'
 
 const PostsList = ({posts = []}) => (
-    <>
+    <FullDiv>
         { posts.length === 0 && <PostNotFound/> }
         <TransitionGroup>
             {posts.map( (post, i) => post.deleted === false && 
@@ -18,7 +18,7 @@ const PostsList = ({posts = []}) => (
                 </Fade>
             )}
         </TransitionGroup>
-    </>
+    </FullDiv>
 )
 
 const mapStateToProps = ({posts, sort}, {match}) => {
