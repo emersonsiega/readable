@@ -13,7 +13,6 @@ const app = express()
 app.use(express.static('public'))
 app.use(cors())
 
-
 app.get('/', (req, res) => {
   const help = `
   <pre>
@@ -124,7 +123,6 @@ app.use((req, res, next) => {
     })
   }
 })
-
 
 app.get('/categories', (req, res) => {
     categories.getAll(req.token)
