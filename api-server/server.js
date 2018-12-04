@@ -14,7 +14,7 @@ app.use(express.static('public'))
 app.use(cors())
 
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
   const help = `
   <pre>
     <h3>Welcome to the Readable API!</h3>
