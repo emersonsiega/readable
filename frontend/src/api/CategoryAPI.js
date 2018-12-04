@@ -5,7 +5,7 @@ import { url } from './Config'
 
 class CategoryAPI {
     static _service = axios.create({
-        baseURL: `${url}/`,
+        baseURL: `${url}`,
         timeout: 20000,
         headers: {
             'Accept': 'application/json',
