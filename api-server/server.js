@@ -13,6 +13,11 @@ const app = express()
 app.use(express.static('public'))
 app.use(cors())
 
+if (process.env.NODE_ENV === 'production') {
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, '../frontend', 'build', 'index.html'))
+    })
+}
 
 app.get('/api', (req, res) => {
   const help = `
@@ -124,12 +129,6 @@ app.use('/api/*', (req, res, next) => {
     })
   }
 })
-
-if (process.env.NODE_ENV === 'production') {
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, '../frontend', 'build', 'index.html'))
-    })
-}
 
 app.get('/api/categories', (req, res) => {
     categories.getAll(req.token)

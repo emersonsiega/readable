@@ -5,7 +5,7 @@ import { getToken } from '../utils/TokenHelper'
 class CommentsAPI {
     //TODO: buscar o endpoint de algum lugar...
     static _service = axios.create({
-        baseURL: "http://localhost:3001/comments",
+        baseURL: "http://localhost:3001/api/comments",
         timeout: 20000,
         headers: {
             'Accept': 'application/json',
