@@ -10,6 +10,7 @@ const fetchCategories = (categories) => ({
 const handleFetchCategories = () => dispatch => {
     CategoryAPI.categories()
         .then(data => dispatch(fetchCategories(data)))
+        .catch(err => console.error(err))
 }
 
 export {
