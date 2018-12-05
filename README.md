@@ -26,6 +26,10 @@ _maybe the server need some seconds to start, because of inactivity_
 **This is the face of Readable**  
 ![readable-print](http://i.imgur.com/yjRmtKe.png)
 
+**Prototype**  
+I've _tried_ to follow [this](https://www.figma.com/proto/D2WFh6tJn9irG5V1VJNGgk9s/readable?node-id=6%3A260&scaling=contain&redirected=1) prototype, made by myself.  
+_Don't judge me, it's first time I've used Figma and I'm not a **good** designer_
+
 
 ## API Server  
 Information about the API server and how to use it can be found in its [README file](api-server/README.md).
